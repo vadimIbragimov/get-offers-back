@@ -1,0 +1,32 @@
+{
+  "name": "off_statistics_parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index2.js",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "parser": "^0.1.4",
+    "puppeteer": "^5.5.0"
+  },
+  "devDependencies": {
+    "puppeteer-autoscroll-down": "^0.1.6"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "start1": "node index2.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run start\" \"npm run start1\"",
+    "type": "module"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Petrov012110/off_statistics_parser.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Petrov012110/off_statistics_parser/issues"
+  },
+  "homepage": "https://github.com/Petrov012110/off_statistics_parser#readme"
+}
