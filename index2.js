@@ -1,11 +1,11 @@
 const puppeteer = require('puppeteer');
 const config = require('./config.json');
-const urls = require('./urls.json');
 const fs = require('fs');
-
+const pUtils = require('./scroll');
 const sleep = (ms) => new Promise( (res) => {
     setTimeout (res, ms);
 });
+
 (async () => {
     const browser = await puppeteer.launch({
         headless: true,
@@ -32,9 +32,6 @@ const sleep = (ms) => new Promise( (res) => {
     await page.click('#index_login_button');
     await page.waitForNavigation();
     
-    console.log(urls.url[1]);
-    console.log(urls.url.length);
-    
         let pageURL = 'https://vk.com/stremobzorstore';
         try{
             
@@ -45,7 +42,7 @@ const sleep = (ms) => new Promise( (res) => {
             console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
         }
 
-        await autoScroll(page); 
+        await pUtils.autoScroll(page); 
         await sleep(1500);
 
         const result = await page.$$eval('.post', (elements) =>{
@@ -83,22 +80,3 @@ const sleep = (ms) => new Promise( (res) => {
                                                            
 })();
 
-async function autoScroll(page){
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 130;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                    window.scrollBy(0, distance);
-                    totalHeight += distance;
-
-
-                if(totalHeight*1.1 >= scrollHeight){ //1.013
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 100);
-        });
-    });
-}

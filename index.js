@@ -1,10 +1,11 @@
 const puppeteer = require('puppeteer');
 const config = require('./config.json');
 const fs = require('fs');
-
+const pUtils = require('./scroll');
 const sleep = (ms) => new Promise( (res) => {
     setTimeout (res, ms);
 });
+
 (async () => {
 
     const browser = await puppeteer.launch({
@@ -41,7 +42,7 @@ const sleep = (ms) => new Promise( (res) => {
         console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
     }
 
-    await autoScroll(page); 
+    await pUtils.autoScroll(page); 
     await sleep(1500);
 
     const result = await page.$$eval('.post', (elements) =>{
@@ -76,24 +77,7 @@ const sleep = (ms) => new Promise( (res) => {
         await browser.close();
 })();
 
-async function autoScroll(page){
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 130;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                    window.scrollBy(0, distance);
-                    totalHeight += distance;
-                    
-                if(totalHeight*1.1 >= scrollHeight){ //1.013
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 100);
-        });
-    });
-}
+
 
 
 
