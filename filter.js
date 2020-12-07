@@ -1,28 +1,18 @@
 
 const dataJson = require('./data.json');
-
-// console.log(dataJson.length);
-
-// let b = dataJson[1];
-//  console.log(b);
-for (let i = 0; i <= dataJson.length; i++){
-    for (const [key, value] of Object.entries(dataJson[i])) {
-            if (value.indexOf('Off')> -1){
-                console.log(value);
-            }
-        
-
-        // console.log(`${key}: ${value}`);
-      }
-    // console.log(Object.entries(dataJson[i]));
-    
-//     for (let text in dataJson[i]){
-//         if (text === 'Air' && 'air'){
-//             console.log(dataJson[i]);
-//         }
-
+// let newArr = [];
+// for (let i = 0; i < dataJson.length; i++){
+//     if ((dataJson[i].text.indexOf('Off') >= 0) && (dataJson[i].text.indexOf('Nike') >= 0)){
+//         console.log(dataJson[i].text);
+//         console.log(dataJson[i].data);
+//         newArr.push(dataJson[i].text);
 //     }
-}
+// }
+// console.log(newArr);
 
 
+
+let user = dataJson.filter(item => item.text.indexOf('Off') >= 0);
+
+console.log(user); // Вася
 
