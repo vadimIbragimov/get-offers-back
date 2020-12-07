@@ -1,5 +1,11 @@
+const dataTheMarket = require('./dataTheMarket.json');
+const dataStremObzorStore = require('./dataStremObzorStore.json');
+let concatArr = dataTheMarket.concat(dataStremObzorStore);
 
-const dataJson = require('./data.json');
+let user = concatArr.filter(item => item.text.indexOf('Nike') >= 0);
+
+console.log(user); 
+
 // let newArr = [];
 // for (let i = 0; i < dataJson.length; i++){
 //     if ((dataJson[i].text.indexOf('Off') >= 0) && (dataJson[i].text.indexOf('Nike') >= 0)){
@@ -9,10 +15,3 @@ const dataJson = require('./data.json');
 //     }
 // }
 // console.log(newArr);
-
-
-
-let user = dataJson.filter(item => item.text.indexOf('Off') >= 0);
-
-console.log(user); // Вася
-

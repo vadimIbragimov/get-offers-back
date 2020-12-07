@@ -69,11 +69,11 @@ const sleep = (ms) => new Promise( (res) => {
 
     await page.screenshot({path: 'example.png'});
         
-    fs.writeFile("data2.json", JSON.stringify(result), 'utf8', function(err) {
+    fs.writeFile("dataStremObzorStore.json", JSON.stringify(result), 'utf8', function(err) {
         if(err) {
             return console.log(err);
         }
-        console.log("The data has been scraped and saved successfully! View it at './data2.json'");
+        console.log("The data has been scraped and saved successfully! View it at './dataStremObzorStore.json'");
     });
 
     await browser.close();

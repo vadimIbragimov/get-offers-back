@@ -67,11 +67,11 @@ const sleep = (ms) => new Promise( (res) => {
         console.log(result);
         console.log(result.length);
 
-        fs.writeFile("data.json", JSON.stringify(result), 'utf8', function(err) {
+        fs.writeFile("dataTheMarket.json", JSON.stringify(result), 'utf8', function(err) {
             if(err) {
                 return console.log(err);
             }
-            console.log("The data has been scraped and saved successfully! View it at './data.json'");
+            console.log("The data has been scraped and saved successfully! View it at './dataTheMarket.json'");
         });
         
         await browser.close();
