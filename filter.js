@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const dataJson = require('./data.json');
 
 // console.log(dataJson.length);
@@ -23,9 +23,6 @@ for (let i = 0; i <= dataJson.length; i++){
 
 //     }
 }
-=======
-const data = require('./data.json');
-console.log(data.length);
->>>>>>> 014bef592d4bba64cc8ea4ab867f228c4d823dd3
+
 
 
