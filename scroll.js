@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 014bef592d4bba64cc8ea4ab867f228c4d823dd3
 async function autoScroll(page){
     await page.evaluate(async () => {
         await new Promise((resolve, reject) => {
@@ -18,6 +21,10 @@ async function autoScroll(page){
     });
 }
 
+<<<<<<< HEAD
 module.exports ={
+=======
+module.exports =  {
+>>>>>>> 014bef592d4bba64cc8ea4ab867f228c4d823dd3
     autoScroll
 }
