@@ -1,4 +1,3 @@
-
 async function autoScroll(page){
     await page.evaluate(async () => {
         await new Promise((resolve, reject) => {
@@ -9,7 +8,7 @@ async function autoScroll(page){
                     window.scrollBy(0, distance);
                     totalHeight += distance;
                     
-                if(totalHeight*1.1 >= scrollHeight){ //1.013
+                if(totalHeight*1.1 >= scrollHeight){ //1.013(примерно 10 дней)
                     clearInterval(timer);
                     resolve();
                 }
@@ -17,7 +16,6 @@ async function autoScroll(page){
         });
     });
 }
-
 
 module.exports =  {
     autoScroll

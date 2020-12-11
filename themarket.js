@@ -43,7 +43,7 @@ const sleep = (ms) => new Promise( (res) => {
     }
 
     await pUtils.autoScroll(page); 
-    await sleep(1500);
+    await sleep(500);
 
     const result = await page.$$eval('.post', (elements) =>{
         const data = [];

@@ -43,7 +43,7 @@ const sleep = (ms) => new Promise( (res) => {
         }
 
         await pUtils.autoScroll(page); 
-        await sleep(1500);
+        await sleep(500);
 
         const result = await page.$$eval('.post', (elements) =>{
             const data2 = [];
@@ -52,7 +52,7 @@ const sleep = (ms) => new Promise( (res) => {
                 let newtext = '';
                 for (let i = 0; i < texthtml.length; i++){
                     
-                    if (texthtml[i] == '<'){
+                    if (texthtml[i] == "<" ){
                         data2.push({
                             text: newtext,
                             data: el.querySelector('.rel_date').innerText,
