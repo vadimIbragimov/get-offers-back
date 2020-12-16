@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const config = require('./config.json');
 const fs = require('fs');
-const pUtils = require('./scroll');
+const scroll = require('./scroll');
 const sleep = (ms) => new Promise( (res) => {
     setTimeout (res, ms);
 });
@@ -42,7 +42,7 @@ const sleep = (ms) => new Promise( (res) => {
         console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
     }
 
-    await pUtils.autoScroll(page); 
+    await scroll.autoScroll(page); 
     await sleep(500);
 
     const result = await page.$$eval('.post', (elements) =>{

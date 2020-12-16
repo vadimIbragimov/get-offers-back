@@ -15,3 +15,16 @@ console.log(user);
 //     }
 // }
 // console.log(newArr);
+
+let obj = JSON.parse(JSON.stringify(user));
+for (key in obj) {
+	let ul = document.createElement("ul");
+  for (key2 in obj[key]){
+			let li = document.createElement("li");
+      li.innerHTML = obj[key][key2];
+  		ul.appendChild(li);
+    }
+    document.body.appendChild(ul);
+    document.body.appendChild(document.createElement("br"));
+    document.body.appendChild(document.createElement("br"));
+}
