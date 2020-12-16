@@ -1,4 +1,4 @@
 node_modules
 
-dataStremObzorStore.json
-dataTheMarket.json
+src/dataStremObzorStore.json
+src/dataTheMarket.json
