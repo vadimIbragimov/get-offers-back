@@ -1,4 +1,4 @@
 node_modules
 
-src/dataStremObzorStore.json
-src/dataTheMarket.json
+src/puppeteer/dataStremObzorStore.json
+src/puppeteer/dataTheMarket.json

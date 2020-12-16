@@ -2,6 +2,9 @@ const puppeteer = require('puppeteer');
 const config = require('./config.json');
 const fs = require('fs');
 const scroll = require('./scroll');
+import groups from "./groups";
+
+console.log(groups);
 const sleep = (ms) => new Promise( (res) => {
     setTimeout (res, ms);
 });
@@ -75,6 +78,8 @@ const sleep = (ms) => new Promise( (res) => {
         });
         
         await browser.close();
+
+
 })();
 
 
