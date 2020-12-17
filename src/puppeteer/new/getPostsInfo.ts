@@ -14,8 +14,8 @@ const getPostsInfo = async (groups: groupNameType[], keyWords: string[]) => {
     // тут делаем подготовительные работы
 
     for (const groupName of groups) {
-        const parserFuncName = groupsList[groupName];
-        let parserFunc;
+        const parserFuncName = groupsList[groupName]; // это объект группы, выглядит примерно так: {href: ...}
+        let parserFunc; //сюда ляжет функция, которая должна будет запускаться на контенте
         try {
             parserFunc = (await import(`./groupParsers/${groupName}`))?.[groupName];
             if (parserFunc) {
