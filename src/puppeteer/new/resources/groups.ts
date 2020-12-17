@@ -1,9 +1,16 @@
-const groups = {
-    theMarket : {
-        href: 'tmrkt',
-        parserName: 'theMarket',
-    },
-
+type groupType = {
+    href: string,
 }
 
-export default groups;
+export type groupNameType = 'theMarket' |  'stremObzorStore';
+
+const groupsList: Record<groupNameType, groupType> = {
+    theMarket : {
+        href: 'tmrkt',
+    },
+    stremObzorStore: {
+        href: 'tmrkt',
+    }
+}
+
+export default groupsList;

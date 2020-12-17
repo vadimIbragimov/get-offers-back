@@ -1,8 +1,9 @@
-import {filterObjectType} from "../tools/filter";
-
-export const theMarket = (elements: Element[]) => {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.theMarket = void 0;
+const theMarket = (elements) => {
     const data = [];
-    data.push('qwe')
+    data.push('qwe');
     // for (const el of elements) {
     //     const texthtml = el.querySelector('.wall_post_text').innerHTML;
     //     let newtext = '';
@@ -18,4 +19,6 @@ export const theMarket = (elements: Element[]) => {
     //     }
     // }
     return data;
-}
+};
+exports.theMarket = theMarket;
+//# sourceMappingURL=theMarket.js.map

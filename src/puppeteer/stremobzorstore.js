@@ -2,18 +2,21 @@ const puppeteer = require('puppeteer');
 const config = require('./config.json');
 const fs = require('fs');
 const scroll = require('./scroll');
+const findPrice = require('./lookforprice');
+
 const sleep = (ms) => new Promise( (res) => {
     setTimeout (res, ms);
 });
 
 (async () => {
     const browser = await puppeteer.launch({
+        executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
+        userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
         headless: false,
     });
-
     const page = await browser.newPage();
-    
-    await page.goto('https://vk.com');
+    await page.goto('https://vk.com/stremobzorstore')
+    // await page.goto('https://vk.com');
     await page.setViewport({
         width: 1370,
         height: 900
@@ -22,20 +25,19 @@ const sleep = (ms) => new Promise( (res) => {
         console.log('PAGE.LOG', msg.text());
     })
 
-    await page.$eval('#index_email', (elem, login) => {
-        elem.value = login;
-    }, config.login);
-    await page.$eval('#index_pass', (elem, password) => {
-        elem.value = password;
-    }, config.password);
+    // await page.$eval('#index_email', (elem, login) => {
+    //     elem.value = login;
+    // }, config.login);
+    // await page.$eval('#index_pass', (elem, password) => {
+    //     elem.value = password;
+    // }, config.password);
 
-    await page.click('#index_login_button');
-    await page.waitForNavigation();
+    // await page.click('#index_login_button');
+    // await page.waitForNavigation();
     
         let pageURL = 'https://vk.com/stremobzorstore';
         try{
-            
-            await page.goto(pageURL);
+            // await page.goto(pageURL);
             console.log(`Открываю страницу: ${pageURL}`);
         }
         catch (error) {
@@ -50,12 +52,27 @@ const sleep = (ms) => new Promise( (res) => {
             for (const el of elements){
                 let texthtml = el.querySelector('.wall_post_text').innerHTML;
                 let newtext = '';
+                function lookforprice(){
+                    var numEl = '';
+                
+                    if(parseInt(texthtml.match(/\d{4}/)) ){
+                        numEl = parseInt(texthtml.match(/\d{4}/));
+                    }
+                    else if(parseInt(texthtml.match(/\d{3}/)) ) {
+                        numEl = parseInt(texthtml.match(/\d{3}/));
+                    }
+                    else{
+                        numEl = '-';
+                    }
+                    return numEl
+                }
+
                 for (let i = 0; i < texthtml.length; i++){
-                    
-                    if (texthtml[i] == "<" ){
+                    if (texthtml[i] === '/'  ){
                         data2.push({
                             text: newtext,
                             data: el.querySelector('.rel_date').innerText,
+                            price: lookforprice()
                         });
                         break;
                     }
@@ -63,7 +80,7 @@ const sleep = (ms) => new Promise( (res) => {
                 }
             }
             return data2;
-        }); 
+        });
         console.log(result);
         console.log(result.length);
 
@@ -79,4 +96,3 @@ const sleep = (ms) => new Promise( (res) => {
     await browser.close();
                                                            
 })();
-

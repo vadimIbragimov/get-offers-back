@@ -1,21 +1,20 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": ".",
-    "rootDir": "./src",
-    "paths": {
-      "*": [
-        "node_modules/*"
-      ]
-    }
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {},
+  "rules": {
+    "trailing-comma": [ false ],
+    "no-console": false
   },
-  "include": [
-    "src/**/*"
+  "rulesDirectory": [],
+  "triple-equals":  [true, "allow-undefined-check", "allow-null-check"],
+  "strict-comparisons":  [
+    true,
+    {
+      "allow-object-equal-comparison": false,
+      "allow-string-order-comparison": false
+    }
   ]
 }
