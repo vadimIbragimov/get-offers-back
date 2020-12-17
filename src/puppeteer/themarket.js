@@ -37,7 +37,7 @@ const sleep = (ms) => new Promise( (res) => {
     await page.waitForNavigation();
     
     try{
-        let pageURL = 'https://vk.com/tmrkt';
+        let pageURL = `https://vk.com/${groups.theMarket.href}`;
         await page.goto(pageURL);
         console.log(`Открываю страницу: ${pageURL}`);
     }
