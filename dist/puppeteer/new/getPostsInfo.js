@@ -43,8 +43,8 @@ const getPostsInfo = (groups, keyWords) => __awaiter(void 0, void 0, void 0, fun
     const result = [];
     // тут делаем подготовительные работы
     for (const groupName of groups) {
-        const parserFuncName = groups_1.default[groupName];
-        let parserFunc;
+        const parserFuncName = groups_1.default[groupName]; // это объект группы, выглядит примерно так: {href: ...}
+        let parserFunc; // сюда ляжет функция, которая должна будет запускаться на контенте
         try {
             parserFunc = (_a = (yield Promise.resolve().then(() => __importStar(require(`./groupParsers/${groupName}`))))) === null || _a === void 0 ? void 0 : _a[groupName];
             if (parserFunc) {

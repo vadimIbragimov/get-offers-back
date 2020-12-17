@@ -1,4 +1,7 @@
 node_modules
+dist
+.idea
 
 src/puppeteer/dataStremObzorStore.json
 src/puppeteer/dataTheMarket.json
+src/mailCredentials.ts
