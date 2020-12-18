@@ -8,7 +8,7 @@ async function autoScroll(page){
                     window.scrollBy(0, distance);
                     totalHeight += distance;
                     
-                if(totalHeight*1.013 >= scrollHeight){ //1.013(примерно 10 дней)
+                if(totalHeight*1.1 >= scrollHeight){ //1.013(примерно 10 дней)
                     clearInterval(timer);
                     resolve();
                 }

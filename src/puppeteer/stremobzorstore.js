@@ -9,13 +9,10 @@ const sleep = (ms) => new Promise( (res) => {
 });
 
 (async () => {
-    const browser = await puppeteer.launch({
-        executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
-        userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-        headless: false,
-    });
+    
+    const browser = await getPage();
     const page = await browser.newPage();
-    await page.goto('https://vk.com/stremobzorstore')
+    // await page.goto('https://vk.com/stremobzorstore')
     // await page.goto('https://vk.com');
     await page.setViewport({
         width: 1370,
@@ -34,59 +31,17 @@ const sleep = (ms) => new Promise( (res) => {
 
     // await page.click('#index_login_button');
     // await page.waitForNavigation();
+
+    const pageURL = 'https://vk.com/stremobzorstore';
     
-        let pageURL = 'https://vk.com/stremobzorstore';
-        try{
-            // await page.goto(pageURL);
-            console.log(`Открываю страницу: ${pageURL}`);
-        }
-        catch (error) {
-            console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
-        }
 
-        await scroll.autoScroll(page); 
-        await sleep(500);
 
-        const result = await page.$$eval('.post', (elements) =>{
-            const data2 = [];
-            for (const el of elements){
-                let texthtml = el.querySelector('.wall_post_text').innerHTML;
-                let newtext = '';
-                function lookforprice(){
-                    var numEl = '';
-                
-                    if(parseInt(texthtml.match(/\d{4}/)) ){
-                        numEl = parseInt(texthtml.match(/\d{4}/));
-                    }
-                    else if(parseInt(texthtml.match(/\d{3}/)) ) {
-                        numEl = parseInt(texthtml.match(/\d{3}/));
-                    }
-                    else{
-                        numEl = '-';
-                    }
-                    return numEl
-                }
-
-                for (let i = 0; i < texthtml.length; i++){
-                    if (texthtml[i] === '/'  ){
-                        data2.push({
-                            text: newtext,
-                            data: el.querySelector('.rel_date').innerText,
-                            price: lookforprice()
-                        });
-                        break;
-                    }
-                    newtext += texthtml[i];
-                }
-            }
-            return data2;
-        });
-        console.log(result);
-        console.log(result.length);
-
-    await page.screenshot({path: 'example.png'});
+    let res = await parsePage(page, pageURL);
         
-    fs.writeFile("dataStremObzorStore.json", JSON.stringify(result), 'utf8', function(err) {
+        console.log(res);
+        console.log(res.length);
+        
+    fs.writeFile("dataStremObzorStore.json", JSON.stringify(res), 'utf8', function(err) {
         if(err) {
             return console.log(err);
         }
@@ -97,3 +52,80 @@ const sleep = (ms) => new Promise( (res) => {
                                                            
 })();
 
+
+
+// запускаем браузер и возвращаем страничку
+async function getPage(){
+    try{
+        const browser = puppeteer.launch({
+            executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
+            userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
+            headless: false,
+        });
+        return browser
+    }
+    catch (error){
+        console.log(`Не удалось открыть browser, из-за ошибки: ${error}`);
+    }
+}
+
+//парсим группу 
+    async function parsePage(page, pageURL){
+        try{
+            await page.goto(pageURL);
+            console.log(`Открываю страницу: ${pageURL}`);
+        }
+        catch (error) {
+            console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
+        }
+
+        await scroll.autoScroll(page); 
+        await sleep(500);
+
+        //собираем посты
+        const result = await page.$$eval('.post', parseFunc);
+
+        return result;
+    }
+
+//скрипт собирающий посты
+const parseFunc = (elements) => {
+    const data = [];
+    for (const el of elements){
+        let texthtml = el.querySelector('.wall_post_text').innerHTML;
+        let newtext = '';
+        let br = /<br>/gi;
+        let newStr = texthtml.replace(br, ' ');
+        function lookforprice(texthtml){
+            var numEl = '';
+            if(parseInt(texthtml.match(/\d{5}/)) ){
+                numEl = parseInt(texthtml.match(/\d{5}/));
+            }
+            else if(parseInt(texthtml.match(/\d{4}/)) ) {
+                numEl = parseInt(texthtml.match(/\d{4}/));
+            }
+            else if(parseInt(texthtml.match(/\d{3}/)) ) {
+                numEl = parseInt(texthtml.match(/\d{3}/));
+            }
+            else{
+                numEl = '-';
+            }
+            return numEl;
+        }
+
+        for (let i = 0; i < texthtml.length; i++){
+            if (texthtml[i] === '/'  ){
+                data.push({
+                    text: newStr,
+                    data: el.querySelector('.rel_date').innerText,
+                    price: lookforprice(texthtml),
+                    customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
+                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
+                });
+                break;
+            }
+            newtext += texthtml[i];
+        }
+    }
+    return data;
+}
