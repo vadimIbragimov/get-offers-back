@@ -21,7 +21,7 @@ const sleep = (ms) => new Promise( (res) => {
     page.on('console', (msg) => {
         console.log('PAGE.LOG', msg.text());
     })
-
+    //пока что заходим с авторизацией в VK, на сервере настроим без авторизации, тк везде настройки индивидуальные 
     await page.$eval('#index_email', (elem, login) => {
         elem.value = login;
     }, config.login);
