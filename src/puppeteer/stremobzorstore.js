@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const config = require('./config.json');
 const fs = require('fs');
 const scroll = require('./scroll');
-const findPrice = require('./lookforprice');
+// const findPrice = require('./lookforprice');
 
 const sleep = (ms) => new Promise( (res) => {
     setTimeout (res, ms);
@@ -13,7 +13,7 @@ const sleep = (ms) => new Promise( (res) => {
     const browser = await getPage();
     const page = await browser.newPage();
     // await page.goto('https://vk.com/stremobzorstore')
-    // await page.goto('https://vk.com');
+    await page.goto('https://vk.com');
     await page.setViewport({
         width: 1370,
         height: 900
@@ -22,15 +22,15 @@ const sleep = (ms) => new Promise( (res) => {
         console.log('PAGE.LOG', msg.text());
     })
 
-    // await page.$eval('#index_email', (elem, login) => {
-    //     elem.value = login;
-    // }, config.login);
-    // await page.$eval('#index_pass', (elem, password) => {
-    //     elem.value = password;
-    // }, config.password);
+    await page.$eval('#index_email', (elem, login) => {
+        elem.value = login;
+    }, config.login);
+    await page.$eval('#index_pass', (elem, password) => {
+        elem.value = password;
+    }, config.password);
 
-    // await page.click('#index_login_button');
-    // await page.waitForNavigation();
+    await page.click('#index_login_button');
+    await page.waitForNavigation();
 
     const pageURL = 'https://vk.com/stremobzorstore';
     
@@ -58,8 +58,11 @@ const sleep = (ms) => new Promise( (res) => {
 async function getPage(){
     try{
         const browser = puppeteer.launch({
-            executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
-            userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
+            // executablePath: '/Programs/chrome-win/chrome.exe',
+            // userDataDir: "/Users/grish/AppData/Local/Chromium/User Data/Profile 1",
+            //рабочий Chromium
+            // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
+            // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
             headless: false,
         });
         return browser
@@ -120,7 +123,7 @@ const parseFunc = (elements) => {
                     data: el.querySelector('.rel_date').innerText,
                     price: lookforprice(texthtml),
                     customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
-                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
+                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('.author').getAttribute('data-post-id')
                 });
                 break;
             }
