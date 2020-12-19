@@ -9,7 +9,7 @@ const groupsList: Record<groupNameType, groupType> = {
         href: 'tmrkt',
     },
     stremObzorStore: {
-        href: 'tmrkt',
+        href: 'stremobzorstore',
     }
 }
 
