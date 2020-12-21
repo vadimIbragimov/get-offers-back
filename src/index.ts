@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -6,8 +7,8 @@ import { groupNameType } from "./puppeteer/new/resources/groups";
 import nodemailer from 'nodemailer';
 import mailCredentials from  './mailCredentials';
 import puppeteer from 'puppeteer';
-
 import fs from 'fs';
+
 
 
 const validateEmail = (email: string) => {
@@ -30,7 +31,7 @@ const PORT = 808;
 app.use(cors());
 app.use(bodyParser.json());
 
-(async () => {
+const mainFunc = async () => {
     const browser = await puppeteer.launch({
         headless: true,
     });
@@ -65,4 +66,6 @@ app.use(bodyParser.json());
     app.listen(PORT, () => {
         console.log(`server started at http://localhost:${PORT}`);
     })
-})
+};
+
+mainFunc();

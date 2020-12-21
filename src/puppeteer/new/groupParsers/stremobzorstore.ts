@@ -7,16 +7,16 @@ export const stremObzorStore = (elements: Element[]) => {
         let newtext = '';
         const br = /<br>/gi;
         const newStr = texthtml.replace(br, ' ');
-        function lookforprice(texthtml: any){
+        const lookforprice = (text: any) => {
             let numEl: number | string = '';
-            if(parseInt(texthtml.match(/\d{5}/)) ){
-                numEl = parseInt(texthtml.match(/\d{5}/));
+            if(parseInt(text.match(/\d{5}/)) ){
+                numEl = parseInt(text.match(/\d{5}/));
             }
-            else if(parseInt(texthtml.match(/\d{4}/)) ) {
-                numEl = parseInt(texthtml.match(/\d{4}/));
+            else if(parseInt(text.match(/\d{4}/)) ) {
+                numEl = parseInt(text.match(/\d{4}/));
             }
-            else if(parseInt(texthtml.match(/\d{3}/)) ) {
-                numEl = parseInt(texthtml.match(/\d{3}/));
+            else if(parseInt(text.match(/\d{3}/)) ) {
+                numEl = parseInt(text.match(/\d{3}/));
             }
             else{
                 numEl = '-';
@@ -24,8 +24,9 @@ export const stremObzorStore = (elements: Element[]) => {
             return numEl;
         }
 
-        for (let i = 0; i < texthtml.length; i++){
-            if (texthtml[i] === '/'  ){
+
+        for (const character of texthtml){
+            if (character === '/'  ){
                 data.push({
                     text: newStr,
                     data: (el.querySelector('.rel_date') as HTMLElement).innerText,
@@ -35,7 +36,7 @@ export const stremObzorStore = (elements: Element[]) => {
                 });
                 break;
             }
-            newtext += texthtml[i];
+            newtext += character;
         }
     }
     return data;

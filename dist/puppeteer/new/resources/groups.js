@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const groupsList = {
+var groupsList = {
     theMarket: {
         href: 'tmrkt',
     },
     stremObzorStore: {
-        href: 'tmrkt',
+        href: 'stremobzorstore',
     }
 };
 exports.default = groupsList;

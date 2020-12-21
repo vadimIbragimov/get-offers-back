@@ -5,16 +5,16 @@ export const theMarket = (elements: Element[]) => {
     for (const el of elements){
         const texthtml: string = el.querySelector('.wall_post_text').innerHTML;
         let newtext = '';
-        function lookforprice(texthtml: any){
+        const lookforprice = (text: any) => {
             let numEl: number | string = '';
-            if(parseInt(texthtml.match(/\d{5}/)) ){
-                numEl = parseInt(texthtml.match(/\d{5}/));
+            if(parseInt(text.match(/\d{5}/)) ){
+                numEl = parseInt(text.match(/\d{5}/));
             }
-            else if(parseInt(texthtml.match(/\d{4}/)) ) {
-                numEl = parseInt(texthtml.match(/\d{4}/));
+            else if(parseInt(text.match(/\d{4}/)) ) {
+                numEl = parseInt(text.match(/\d{4}/));
             }
-            else if(parseInt(texthtml.match(/\d{3}/)) ) {
-                numEl = parseInt(texthtml.match(/\d{3}/));
+            else if(parseInt(text.match(/\d{3}/)) ) {
+                numEl = parseInt(text.match(/\d{3}/));
             }
             else{
                 numEl = '-';
