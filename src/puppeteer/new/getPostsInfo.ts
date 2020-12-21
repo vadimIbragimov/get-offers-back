@@ -1,18 +1,12 @@
-// import puppeteer from 'puppeteer';
-// import fs from 'fs';
-// import autoScroll from './tools/scroll'
-
+import { Browser } from "puppeteer";
 import groupsList, { groupNameType } from "./resources/groups";
-// import filter, {filterObjectType} from "./tools/filter";
 
 // const config = require('./resources/config.json');
 
 const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
 
-const getPostsInfo = async (groups: groupNameType[], keyWords: string[]) => {
+const getPostsInfo = async (groups: groupNameType[], keyWords: string[], browser: Browser) => {
     const result = [];
-    // тут делаем подготовительные работы
-
     for (const groupName of groups) {
         const parserFuncName = groupsList[groupName]; // это объект группы, выглядит примерно так: {href: ...}
         let parserFunc; // сюда ляжет функция, которая должна будет запускаться на контенте
