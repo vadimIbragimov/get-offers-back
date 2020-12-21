@@ -3,8 +3,6 @@ import groupsList, { groupNameType } from "./resources/groups";
 
 // const config = require('./resources/config.json');
 
-const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
-
 const getPostsInfo = async (groups: groupNameType[], keyWords: string[], browser: Browser) => {
     const result = [];
     for (const groupName of groups) {
