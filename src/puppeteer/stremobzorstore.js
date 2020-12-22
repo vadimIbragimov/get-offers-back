@@ -13,7 +13,7 @@ const sleep = (ms) => new Promise( (res) => {
     const browser = await getPage();
     const page = await browser.newPage();
     // await page.goto('https://vk.com/stremobzorstore')
-    // await page.goto('https://vk.com');
+    await page.goto('https://vk.com');
     await page.setViewport({
         width: 1370,
         height: 900
@@ -21,16 +21,16 @@ const sleep = (ms) => new Promise( (res) => {
     page.on('console', (msg) => {
         console.log('PAGE.LOG', msg.text());
     })
+    //пока что заходим с авторизацией в VK, на сервере настроим без авторизации, тк везде настройки индивидуальные 
+    await page.$eval('#index_email', (elem, login) => {
+        elem.value = login;
+    }, config.login);
+    await page.$eval('#index_pass', (elem, password) => {
+        elem.value = password;
+    }, config.password);
 
-    // await page.$eval('#index_email', (elem, login) => {
-    //     elem.value = login;
-    // }, config.login);
-    // await page.$eval('#index_pass', (elem, password) => {
-    //     elem.value = password;
-    // }, config.password);
-
-    // await page.click('#index_login_button');
-    // await page.waitForNavigation();
+    await page.click('#index_login_button');
+    await page.waitForNavigation();
 
     const pageURL = 'https://vk.com/tmrkt';
     
@@ -58,8 +58,11 @@ const sleep = (ms) => new Promise( (res) => {
 async function getPage(){
     try{
         const browser = puppeteer.launch({
-            executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
-            userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
+            // executablePath: '/Programs/chrome-win/chrome.exe',
+            // userDataDir: "/Users/grish/AppData/Local/Chromium/User Data/Profile 1",
+            //рабочий Chromium
+            // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
+            // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
             headless: false,
         });
         return browser
@@ -119,8 +122,13 @@ const parseFunc = (elements) => {
                     text: newtext,
                     data: el.querySelector('.rel_date').innerText,
                     price: lookforprice(texthtml),
+<<<<<<< HEAD
                     // customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
                     // post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
+=======
+                    customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
+                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('.author').getAttribute('data-post-id')
+>>>>>>> ec4fcfe6af22e8f478bd219aa4b9b34fdc081b36
                 });
                 break;
             }
