@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const config = require('./config.json');
 const fs = require('fs');
 const scroll = require('./scroll');
-const findPrice = require('./lookforprice');
+// const findPrice = require('./lookforprice');
 
 const sleep = (ms) => new Promise( (res) => {
     setTimeout (res, ms);
@@ -32,7 +32,7 @@ const sleep = (ms) => new Promise( (res) => {
     // await page.click('#index_login_button');
     // await page.waitForNavigation();
 
-    const pageURL = 'https://vk.com/stremobzorstore';
+    const pageURL = 'https://vk.com/tmrkt';
     
 
 
@@ -96,16 +96,16 @@ const parseFunc = (elements) => {
         let newtext = '';
         let br = /<br>/gi;
         let newStr = texthtml.replace(br, ' ');
-        function lookforprice(texthtml){
+        const lookforprice = (text) =>{
             var numEl = '';
-            if(parseInt(texthtml.match(/\d{5}/)) ){
-                numEl = parseInt(texthtml.match(/\d{5}/));
+            if(parseInt(text.match(/\d{5}/)) ){
+                numEl = parseInt(text.match(/\d{5}/));
             }
-            else if(parseInt(texthtml.match(/\d{4}/)) ) {
-                numEl = parseInt(texthtml.match(/\d{4}/));
+            else if(parseInt(text.match(/\d{4}/)) ) {
+                numEl = parseInt(text.match(/\d{4}/));
             }
-            else if(parseInt(texthtml.match(/\d{3}/)) ) {
-                numEl = parseInt(texthtml.match(/\d{3}/));
+            else if(parseInt(text.match(/\d{3}/)) ) {
+                numEl = parseInt(text.match(/\d{3}/));
             }
             else{
                 numEl = '-';
@@ -113,18 +113,18 @@ const parseFunc = (elements) => {
             return numEl;
         }
 
-        for (let i = 0; i < texthtml.length; i++){
-            if (texthtml[i] === '/'  ){
+        for (let i of texthtml){
+            if (i === `"` ){
                 data.push({
-                    text: newStr,
+                    text: newtext,
                     data: el.querySelector('.rel_date').innerText,
                     price: lookforprice(texthtml),
-                    customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
-                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
+                    // customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
+                    // post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
                 });
                 break;
             }
-            newtext += texthtml[i];
+            newtext += i;
         }
     }
     return data;
