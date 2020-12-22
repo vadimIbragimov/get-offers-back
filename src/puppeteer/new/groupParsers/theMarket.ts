@@ -22,8 +22,8 @@ export const theMarket = (elements: Element[]) => {
             return numEl;
         }
 
-        for (let i = 0; i < texthtml.length; i++){
-            if (texthtml[i] === '<' && texthtml[i+1] === 'a'){
+        for (let i of texthtml){
+            if (i === `"`){
                 data.push({
                     text: newtext,
                     data: (el.querySelector('.rel_date') as HTMLElement).innerText,
@@ -33,7 +33,7 @@ export const theMarket = (elements: Element[]) => {
                 });
                 break;
             }
-            newtext += texthtml[i];
+            newtext += i;
         }
     }
     return data;
