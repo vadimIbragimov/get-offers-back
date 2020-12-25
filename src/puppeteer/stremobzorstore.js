@@ -32,7 +32,7 @@ const sleep = (ms) => new Promise( (res) => {
     await page.click('#index_login_button');
     await page.waitForNavigation();
 
-    const pageURL = 'https://vk.com/tmrkt';
+    const pageURL = 'https://vk.com/stremObzorStore';
     
 
 
@@ -63,7 +63,7 @@ async function getPage(){
             //рабочий Chromium
             // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
             // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-            headless: false,
+            headless: true,
         });
         return browser
     }
@@ -101,7 +101,7 @@ const parseFunc = (elements) => {
         if(el.querySelector('.wall_post_more')){
             spantext = el.querySelector('.wall_post_text>span').innerText;
         }        
-        let newtext = '';
+        // let newtext = '';
         // let br = /<br>/gi;
         // let newStr = texthtml.replace(br, ' ');
         const lookforprice = (text) =>{
@@ -135,7 +135,7 @@ const parseFunc = (elements) => {
                 });
                 break;
             }
-            newtext += i;
+            // newtext += i;
         }
     }
     return data;
