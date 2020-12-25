@@ -33,7 +33,7 @@ export const theMarket = (elements: Element[]) => {
                 data.push({
                     text: texthtml + spantext,
                     data: (el.querySelector('.rel_date') as HTMLElement).innerText,
-                    price: lookforprice(newtext),
+                    price: lookforprice(texthtml),
                     customer: '-',
                     post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('.author').getAttribute('data-post-id')
                 });
