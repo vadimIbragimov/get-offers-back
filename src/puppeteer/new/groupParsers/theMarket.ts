@@ -10,7 +10,7 @@ export const theMarket = (elements: Element[]) => {
             spantext = (el.querySelector('.wall_post_text>span') as HTMLElement).innerText;
         } 
 
-        let newtext: string = '';
+        // let newtext: string = '';
         const lookforprice = (text: any) => {
             let numEl: number | string = '';
             if(parseInt(text.match(/\d{5}/)) ){
@@ -39,7 +39,7 @@ export const theMarket = (elements: Element[]) => {
                 });
                 break;
             }
-            newtext += i;
+            // newtext += i;
         }
     }
     return data;

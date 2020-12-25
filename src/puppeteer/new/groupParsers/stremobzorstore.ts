@@ -10,7 +10,7 @@ export const stremObzorStore = (elements: Element[]) => {
             spantext = (el.querySelector('.wall_post_text>span') as HTMLElement).innerText;
         } 
 
-        let newtext: string = '';
+        // let newtext: string = '';
         // const br = /<br>/gi;
         // const newStr = texthtml.replace(br, ' ');
         const lookforprice = (text: any) => {
@@ -41,7 +41,7 @@ export const stremObzorStore = (elements: Element[]) => {
                 });
                 break;
             }
-            newtext += character;
+            // newtext += character;
         }
     }
     return data;
