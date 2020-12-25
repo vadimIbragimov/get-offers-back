@@ -32,7 +32,7 @@ const sleep = (ms) => new Promise( (res) => {
     await page.click('#index_login_button');
     await page.waitForNavigation();
 
-    const pageURL = 'https://vk.com/stremobzorstore';
+    const pageURL = 'https://vk.com/tmrkt';
     
 
 
@@ -97,13 +97,13 @@ const parseFunc = (elements) => {
     for (const el of elements){
         let texthtml = el.querySelector('.wall_post_text').innerText;
         let spantext = '';
-        let spanTXT = '';
+
         if(el.querySelector('.wall_post_more')){
             spantext = el.querySelector('.wall_post_text>span').innerText;
         }        
         let newtext = '';
-        let br = /<br>/gi;
-        let newStr = texthtml.replace(br, ' ');
+        // let br = /<br>/gi;
+        // let newStr = texthtml.replace(br, ' ');
         const lookforprice = (text) =>{
             var numEl = '';
             if(parseInt(text.match(/\d{5}/)) ){
