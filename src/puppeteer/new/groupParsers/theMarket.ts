@@ -3,8 +3,14 @@ import {filterObjectType} from "../tools/filter";
 export const theMarket = (elements: Element[]) => {
     const data = [];
     for (const el of elements){
-        const texthtml: string = el.querySelector('.wall_post_text').innerHTML;
-        let newtext = '';
+        const texthtml: string = (el.querySelector('.wall_post_text') as HTMLElement).innerText;
+
+        let spantext: string = '';
+        if(el.querySelector('.wall_post_more') as HTMLElement){
+            spantext = (el.querySelector('.wall_post_text>span') as HTMLElement).innerText;
+        } 
+
+        let newtext: string = '';
         const lookforprice = (text: any) => {
             let numEl: number | string = '';
             if(parseInt(text.match(/\d{5}/)) ){
@@ -23,9 +29,9 @@ export const theMarket = (elements: Element[]) => {
         }
 
         for (let i of texthtml){
-            if (i === `"`){
+            if (i){
                 data.push({
-                    text: newtext,
+                    text: texthtml + spantext,
                     data: (el.querySelector('.rel_date') as HTMLElement).innerText,
                     price: lookforprice(newtext),
                     customer: '-',

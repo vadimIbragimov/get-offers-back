@@ -3,7 +3,7 @@ import {filterObjectType} from "../tools/filter";
 export const stremObzorStore = (elements: Element[]) => {
     const data = [];
     for (const el of elements){
-        const texthtml: string = (el.querySelector('.wall_post_text') as HTMLElement).innerHTML;
+        const texthtml: string = (el.querySelector('.wall_post_text') as HTMLElement).innerText;
 
         let spantext: string = '';
         if(el.querySelector('.wall_post_more') as HTMLElement){
