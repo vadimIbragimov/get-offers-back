@@ -32,7 +32,7 @@ const sleep = (ms) => new Promise( (res) => {
     await page.click('#index_login_button');
     await page.waitForNavigation();
 
-    const pageURL = 'https://vk.com/tmrkt';
+    const pageURL = 'https://vk.com/stremobzorstore';
     
 
 
@@ -95,7 +95,12 @@ async function getPage(){
 const parseFunc = (elements) => {
     const data = [];
     for (const el of elements){
-        let texthtml = el.querySelector('.wall_post_text').innerHTML;
+        let texthtml = el.querySelector('.wall_post_text').innerText;
+        let spantext = '';
+        let spanTXT = '';
+        if(el.querySelector('.wall_post_more')){
+            spantext = el.querySelector('.wall_post_text>span').innerText;
+        }        
         let newtext = '';
         let br = /<br>/gi;
         let newStr = texthtml.replace(br, ' ');
@@ -117,18 +122,16 @@ const parseFunc = (elements) => {
         }
 
         for (let i of texthtml){
-            if (i === `"` ){
+            if (i){
                 data.push({
-                    text: newtext,
+                    text: texthtml + spantext,
+                    // text2: spantext,
                     data: el.querySelector('.rel_date').innerText,
                     price: lookforprice(texthtml),
-<<<<<<< HEAD
+
                     // customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
                     // post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
-=======
-                    customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
-                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('.author').getAttribute('data-post-id')
->>>>>>> ec4fcfe6af22e8f478bd219aa4b9b34fdc081b36
+
                 });
                 break;
             }
