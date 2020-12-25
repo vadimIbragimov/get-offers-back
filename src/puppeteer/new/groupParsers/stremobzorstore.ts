@@ -3,10 +3,16 @@ import {filterObjectType} from "../tools/filter";
 export const stremObzorStore = (elements: Element[]) => {
     const data = [];
     for (const el of elements){
-        const texthtml: string = el.querySelector('.wall_post_text').innerHTML;
-        let newtext = '';
-        const br = /<br>/gi;
-        const newStr = texthtml.replace(br, ' ');
+        const texthtml: string = (el.querySelector('.wall_post_text') as HTMLElement).innerHTML;
+
+        let spantext: string = '';
+        if(el.querySelector('.wall_post_more') as HTMLElement){
+            spantext = (el.querySelector('.wall_post_text>span') as HTMLElement).innerText;
+        } 
+
+        let newtext: string = '';
+        // const br = /<br>/gi;
+        // const newStr = texthtml.replace(br, ' ');
         const lookforprice = (text: any) => {
             let numEl: number | string = '';
             if(parseInt(text.match(/\d{5}/)) ){
@@ -24,11 +30,10 @@ export const stremObzorStore = (elements: Element[]) => {
             return numEl;
         }
 
-
         for (const character of texthtml){
-            if (character === '/'  ){
+            if (character){
                 data.push({
-                    text: newStr,
+                    text: texthtml + spantext,
                     data: (el.querySelector('.rel_date') as HTMLElement).innerText,
                     price: lookforprice(texthtml),
                     customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
