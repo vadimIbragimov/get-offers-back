@@ -8,7 +8,7 @@ export const stremObzorStore = (elements: Element[]) => {
         let spantext: string = '';
         if(el.querySelector('.wall_post_more') as HTMLElement){
             spantext = (el.querySelector('.wall_post_text>span') as HTMLElement).innerText;
-        } 
+        }
 
         // let newtext: string = '';
         // const br = /<br>/gi;

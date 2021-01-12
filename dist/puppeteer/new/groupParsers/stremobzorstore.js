@@ -4,10 +4,14 @@ exports.stremObzorStore = void 0;
 const stremObzorStore = (elements) => {
     const data = [];
     for (const el of elements) {
-        const texthtml = el.querySelector('.wall_post_text').innerHTML;
-        let newtext = '';
-        const br = /<br>/gi;
-        const newStr = texthtml.replace(br, ' ');
+        const texthtml = el.querySelector('.wall_post_text').innerText;
+        let spantext = '';
+        if (el.querySelector('.wall_post_more')) {
+            spantext = el.querySelector('.wall_post_text>span').innerText;
+        }
+        // let newtext: string = '';
+        // const br = /<br>/gi;
+        // const newStr = texthtml.replace(br, ' ');
         const lookforprice = (text) => {
             let numEl = '';
             if (parseInt(text.match(/\d{5}/))) {
@@ -25,9 +29,9 @@ const stremObzorStore = (elements) => {
             return numEl;
         };
         for (const character of texthtml) {
-            if (character === '/') {
+            if (character) {
                 data.push({
-                    text: newStr,
+                    text: texthtml + spantext,
                     data: el.querySelector('.rel_date').innerText,
                     price: lookforprice(texthtml),
                     customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
@@ -35,7 +39,7 @@ const stremObzorStore = (elements) => {
                 });
                 break;
             }
-            newtext += character;
+            // newtext += character;
         }
     }
     return data;

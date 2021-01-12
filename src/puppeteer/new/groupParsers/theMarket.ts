@@ -8,7 +8,7 @@ export const theMarket = (elements: Element[]) => {
         let spantext: string = '';
         if(el.querySelector('.wall_post_more') as HTMLElement){
             spantext = (el.querySelector('.wall_post_text>span') as HTMLElement).innerText;
-        } 
+        }
 
         // let newtext: string = '';
         const lookforprice = (text: any) => {
@@ -28,7 +28,7 @@ export const theMarket = (elements: Element[]) => {
             return numEl;
         }
 
-        for (let i of texthtml){
+        for (const i of texthtml){
             if (i){
                 data.push({
                     text: texthtml + spantext,
