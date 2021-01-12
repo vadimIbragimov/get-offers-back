@@ -3,8 +3,14 @@ import {filterObjectType} from "../tools/filter";
 export const theMarket = (elements: Element[]) => {
     const data = [];
     for (const el of elements){
-        const texthtml: string = el.querySelector('.wall_post_text').innerHTML;
-        let newtext = '';
+        const texthtml: string = (el.querySelector('.wall_post_text') as HTMLElement).innerText;
+
+        let spantext: string = '';
+        if(el.querySelector('.wall_post_more') as HTMLElement){
+            spantext = (el.querySelector('.wall_post_text>span') as HTMLElement).innerText;
+        } 
+
+        // let newtext: string = '';
         const lookforprice = (text: any) => {
             let numEl: number | string = '';
             if(parseInt(text.match(/\d{5}/)) ){
@@ -22,18 +28,18 @@ export const theMarket = (elements: Element[]) => {
             return numEl;
         }
 
-        for (let i = 0; i < texthtml.length; i++){
-            if (texthtml[i] === '<' && texthtml[i+1] === 'a'){
+        for (let i of texthtml){
+            if (i){
                 data.push({
-                    text: newtext,
+                    text: texthtml + spantext,
                     data: (el.querySelector('.rel_date') as HTMLElement).innerText,
-                    price: lookforprice(newtext),
+                    price: lookforprice(texthtml),
                     customer: '-',
                     post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('.author').getAttribute('data-post-id')
                 });
                 break;
             }
-            newtext += texthtml[i];
+            // newtext += i;
         }
     }
     return data;
