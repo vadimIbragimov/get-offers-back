@@ -1,16 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stremObzorStore = void 0;
-var stremObzorStore = function (elements) {
-    var data = [];
-    for (var _i = 0, elements_1 = elements; _i < elements_1.length; _i++) {
-        var el = elements_1[_i];
-        var texthtml = el.querySelector('.wall_post_text').innerHTML;
-        var newtext = '';
-        var br = /<br>/gi;
-        var newStr = texthtml.replace(br, ' ');
-        var lookforprice = function (text) {
-            var numEl = '';
+const stremObzorStore = (elements) => {
+    const data = [];
+    for (const el of elements) {
+        const texthtml = el.querySelector('.wall_post_text').innerHTML;
+        let newtext = '';
+        const br = /<br>/gi;
+        const newStr = texthtml.replace(br, ' ');
+        const lookforprice = (text) => {
+            let numEl = '';
             if (parseInt(text.match(/\d{5}/))) {
                 numEl = parseInt(text.match(/\d{5}/));
             }
@@ -25,8 +24,7 @@ var stremObzorStore = function (elements) {
             }
             return numEl;
         };
-        for (var _a = 0, texthtml_1 = texthtml; _a < texthtml_1.length; _a++) {
-            var character = texthtml_1[_a];
+        for (const character of texthtml) {
             if (character === '/') {
                 data.push({
                     text: newStr,

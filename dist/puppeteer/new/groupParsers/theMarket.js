@@ -1,14 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.theMarket = void 0;
-var theMarket = function (elements) {
-    var data = [];
-    for (var _i = 0, elements_1 = elements; _i < elements_1.length; _i++) {
-        var el = elements_1[_i];
-        var texthtml = el.querySelector('.wall_post_text').innerHTML;
-        var newtext = '';
-        var lookforprice = function (text) {
-            var numEl = '';
+const theMarket = (elements) => {
+    const data = [];
+    for (const el of elements) {
+        const texthtml = el.querySelector('.wall_post_text').innerHTML;
+        let newtext = '';
+        const lookforprice = (text) => {
+            let numEl = '';
             if (parseInt(text.match(/\d{5}/))) {
                 numEl = parseInt(text.match(/\d{5}/));
             }
@@ -23,7 +22,7 @@ var theMarket = function (elements) {
             }
             return numEl;
         };
-        for (var i = 0; i < texthtml.length; i++) {
+        for (let i = 0; i < texthtml.length; i++) {
             if (texthtml[i] === '<' && texthtml[i + 1] === 'a') {
                 data.push({
                     text: newtext,

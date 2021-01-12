@@ -12,11 +12,15 @@ export async function parsePage(page: Page, pageURL: string, parseFunc: () => ob
         console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
     }
 
-    await autoScroll(page);
-    await sleep(500);
+    // console.log('скролим');
+    // await autoScroll(page);
+    // console.log('Пауза');
+    // await sleep(500);
 
     // собираем посты
+    console.log('получаем данные');
     const result = await page.$$eval('.post', parseFunc);
+    console.log('Данные:', result);
 
     return result;
 }
