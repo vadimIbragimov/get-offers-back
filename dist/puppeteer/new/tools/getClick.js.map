@@ -1,0 +1,1 @@
+{"version":3,"file":"getClick.js","sourceRoot":"","sources":["../../../../src/puppeteer/new/tools/getClick.ts"],"names":[],"mappings":";;AAAA,+CAAsD;AACtD,yCAAsC;AACtC,+CAA8C;AAE7C,QAAQ,CAAC,aAAa,CAAC,MAAM,CAAiB,CAAC,OAAO,GAAG,gBAAgB,CAAC;AAC3E,SAAS,gBAAgB;IACrB,2BAAa,EAAE,CAAC;IAChB,mCAAqB,EAAE,CAAC;IACxB,mBAAQ,EAAE,CAAC;AACf,CAAC"}

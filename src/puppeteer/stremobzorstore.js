@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer');
+var puppeteerAutoscrollDown = require("puppeteer-autoscroll-down");
 const config = require('./config.json');
 const fs = require('fs');
 const scroll = require('./scroll');
@@ -83,6 +84,9 @@ async function getPage(){
         }
 
         await scroll.autoScroll(page); 
+        // const scrollStep = 250 // default
+        // const scrollDelay = 100 // default
+        // await scrollPageToBottom(page, scrollStep, scrollDelay)
         await sleep(500);
 
         //собираем посты

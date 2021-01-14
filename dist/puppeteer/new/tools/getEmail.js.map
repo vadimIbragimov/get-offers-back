@@ -1,0 +1,1 @@
+{"version":3,"file":"getEmail.js","sourceRoot":"","sources":["../../../../src/puppeteer/new/tools/getEmail.ts"],"names":[],"mappings":";;;AAAO,MAAM,QAAQ,GAAG,GAAG,EAAE;IACzB,MAAM,WAAW,GAAa,EAAE,CAAC;IACjC,WAAW,CAAC,IAAI,CAAE,QAAQ,CAAC,cAAc,CAAC,OAAO,CAAS,CAAC,KAAK,CAAC,CAAC;IAClE,OAAO,CAAC,GAAG,CAAC,WAAW,CAAC,CAAC;IACzB,OAAO,WAAW,CAAC;AACvB,CAAC,CAAA;AALY,QAAA,QAAQ,YAKpB"}
