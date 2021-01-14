@@ -33,7 +33,7 @@ const sleep = (ms) => new Promise( (res) => {
     await page.click('#index_login_button');
     await page.waitForNavigation();
 
-    const pageURL = 'https://vk.com/stremobzorstore';
+    const pageURL = 'https://vk.com/stremObzorStore';
     
 
 
@@ -64,7 +64,7 @@ async function getPage(){
             //рабочий Chromium
             // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
             // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-            headless: false,
+            headless: true,
         });
         return browser
     }
@@ -99,20 +99,25 @@ async function getPage(){
 const parseFunc = (elements) => {
     const data = [];
     for (const el of elements){
-        let texthtml = el.querySelector('.wall_post_text').innerHTML;
-        let newtext = '';
-        let br = /<br>/gi;
-        let newStr = texthtml.replace(br, ' ');
-        function lookforprice(texthtml){
+        let texthtml = el.querySelector('.wall_post_text').innerText;
+        let spantext = '';
+
+        if(el.querySelector('.wall_post_more')){
+            spantext = el.querySelector('.wall_post_text>span').innerText;
+        }        
+        // let newtext = '';
+        // let br = /<br>/gi;
+        // let newStr = texthtml.replace(br, ' ');
+        const lookforprice = (text) =>{
             var numEl = '';
-            if(parseInt(texthtml.match(/\d{5}/)) ){
-                numEl = parseInt(texthtml.match(/\d{5}/));
+            if(parseInt(text.match(/\d{5}/)) ){
+                numEl = parseInt(text.match(/\d{5}/));
             }
-            else if(parseInt(texthtml.match(/\d{4}/)) ) {
-                numEl = parseInt(texthtml.match(/\d{4}/));
+            else if(parseInt(text.match(/\d{4}/)) ) {
+                numEl = parseInt(text.match(/\d{4}/));
             }
-            else if(parseInt(texthtml.match(/\d{3}/)) ) {
-                numEl = parseInt(texthtml.match(/\d{3}/));
+            else if(parseInt(text.match(/\d{3}/)) ) {
+                numEl = parseInt(text.match(/\d{3}/));
             }
             else{
                 numEl = '-';
@@ -120,18 +125,21 @@ const parseFunc = (elements) => {
             return numEl;
         }
 
-        for (let i = 0; i < texthtml.length; i++){
-            if (texthtml[i] === '/'  ){
+        for (let i of texthtml){
+            if (i){
                 data.push({
-                    text: newStr,
+                    text: texthtml + spantext,
+                    // text2: spantext,
                     data: el.querySelector('.rel_date').innerText,
                     price: lookforprice(texthtml),
-                    customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
-                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('.author').getAttribute('data-post-id')
+
+                    // customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
+                    // post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
+
                 });
                 break;
             }
-            newtext += texthtml[i];
+            // newtext += i;
         }
     }
     return data;
