@@ -87,7 +87,13 @@ async function getPage(){
         // const scrollStep = 250 // default
         // const scrollDelay = 100 // default
         // await scrollPageToBottom(page, scrollStep, scrollDelay)
-        await puppeteerAutoscrollDown(page)
+        await function autoScroll(page){
+            const scrollStep = 250 // default
+            const scrollDelay = 100 // default
+            puppeteerAutoscrollDown(page, scrollStep, scrollDelay);
+            scrollStep -= 20;
+        }
+        
         await sleep(500);
 
         //собираем посты
