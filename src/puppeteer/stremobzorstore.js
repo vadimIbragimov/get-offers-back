@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-var puppeteerAutoscrollDown = require("puppeteer-autoscroll-down");
+let puppeteerAutoscrollDown = require("puppeteer-autoscroll-down");
 const config = require('./config.json');
 const fs = require('fs');
 const scroll = require('./scroll');
@@ -64,7 +64,7 @@ async function getPage(){
             //рабочий Chromium
             // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
             // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-            headless: true,
+            headless: false,
         });
         return browser
     }
@@ -83,10 +83,11 @@ async function getPage(){
             console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
         }
 
-        await scroll.autoScroll(page); 
+        // await scroll.autoScroll(page); 
         // const scrollStep = 250 // default
         // const scrollDelay = 100 // default
         // await scrollPageToBottom(page, scrollStep, scrollDelay)
+        await puppeteerAutoscrollDown(page)
         await sleep(500);
 
         //собираем посты
