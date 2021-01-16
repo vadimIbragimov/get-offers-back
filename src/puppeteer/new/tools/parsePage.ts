@@ -13,7 +13,7 @@ export async function parsePage(page: Page, pageURL: string, parseFunc: () => ob
     }
 
     // console.log('скролим');
-    // await autoScroll(page);
+    await autoScroll(page);
     // console.log('Пауза');
     // await sleep(500);
 
