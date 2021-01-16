@@ -64,7 +64,7 @@ async function getPage(){
             //рабочий Chromium
             // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
             // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-            headless: false,
+            headless: true,
         });
         return browser
     }
@@ -87,13 +87,15 @@ async function getPage(){
         // const scrollStep = 250 // default
         // const scrollDelay = 100 // default
         // await scrollPageToBottom(page, scrollStep, scrollDelay)
-        await function autoScroll(page){
-            const scrollStep = 250 // default
-            const scrollDelay = 100 // default
-            puppeteerAutoscrollDown(page, scrollStep, scrollDelay);
-            scrollStep -= 20;
-        }
-        
+
+
+
+
+        const scrollStep = 250 // default
+        const scrollDelay = 80 // default
+
+        await puppeteerAutoscrollDown(page, scrollStep, scrollDelay);
+
         await sleep(500);
 
         //собираем посты
@@ -151,3 +153,4 @@ const parseFunc = (elements) => {
     }
     return data;
 }
+
