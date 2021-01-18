@@ -1,5 +1,7 @@
+const dataStremObzorStore = require('./dataStremObzorStore.json');
+let data = dataStremObzorStore;
 
-let data = [
+let datas = [
     {
         text: 'Кроссовки Dunk Low Ceramic Nike, 9.5 US',
         data: 'вчера в 22:00'
@@ -28,9 +30,9 @@ let data = [
 ]
 
 let findData = {
-  id: "asap",
+  // id: "asap",
   // 2: "bubu",
-  // 3: "nike"
+  3: "nike"
 }
 // function clu(data){
 
@@ -44,7 +46,7 @@ function findInObject(findData, data) {
   let allData = [];
     for(let k in data){
       for (let key in data[k]){
-        data[k][key].toLowerCase()
+        // data[k][key].toLowerCase()
         for (let klue in findData){
           if (data[k][key].toLowerCase().indexOf(findData[klue]) >= 0){
             allData.push({

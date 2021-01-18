@@ -152,7 +152,7 @@ const parseFunc = (elements) => {
                     price: lookforprice(texthtml),
 
                     // customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
-                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
+                    // post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
 
                 });
                 break;

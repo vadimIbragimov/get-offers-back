@@ -44,7 +44,7 @@ async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 100) {
             window.scrollBy(0, step)
             count += 1
   
-            if (count >= 100) {
+            if (count >= 10) {
               clearInterval(intervalId)
               resolve(count)
             }
