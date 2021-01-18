@@ -28,7 +28,7 @@ let data = [
 ]
 
 let findData = {
-  1: "asap",
+  id: "asap",
   // 2: "bubu",
   // 3: "nike"
 }
@@ -57,18 +57,34 @@ function findInObject(findData, data) {
   return allData;
 }
 
-let foud = data.find(function(el) {
-  // let c = []
-  // for (let key in findData){
-  //   if (el.text.indexOf(findData[key])){
-  //     c.push(el)
-  //   }
-  // }
-  return 1
-})
+
+// function isNumber(obj) {
+//   return obj!== undefined && typeof(obj) === 'string' && !isNaN(obj);
+// }
 
 
+// let arrByID = data.filter(function (item, findData) {
+//   console.log(findData.length);
+//   if (typeof(item.text) == 'string') {
+//     let newText = item.text.toLowerCase();
+//     for (let k in findData){
+//       if (findData[k].id == newText){
+//         return true;
+//       }
+//     }
+      
+//   }
+//   return false;
+// });
+
+// const filter = (data, findData) => {
+//   return data.filter(item => item.text.includes();
+// }
+
+// console.log(filter);
 console.log(findInObject(findData, data));
+// console.log('===========================================');
+// console.log(arrByID );
 // console.log();
 
 // console.log(data);
