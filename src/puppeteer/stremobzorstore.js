@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-let puppeteerAutoscrollDown = require("puppeteer-autoscroll-down");
+// let puppeteerAutoscrollDown = require("puppeteer-autoscroll-down");
 const config = require('./config.json');
 const fs = require('fs');
 const scroll = require('./scroll');
@@ -83,16 +83,16 @@ async function getPage(){
             console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
         }
 
-        // await scroll.autoScroll(page); 
+        await scroll.autoScroll(page); 
         // const scrollStep = 250 // default
         // const scrollDelay = 100 // default
         // await scrollPageToBottom(page, scrollStep, scrollDelay)
-        await function autoScroll(page){
-            const scrollStep = 250 // default
-            const scrollDelay = 100 // default
-            puppeteerAutoscrollDown(page, scrollStep, scrollDelay);
-            scrollStep -= 20;
-        }
+        // await function autoScroll(page){
+        //     const scrollStep = 250 // default
+        //     const scrollDelay = 100 // default
+        //     puppeteerAutoscrollDown(page, scrollStep, scrollDelay);
+        //     scrollStep -= 20;
+        // }
         
         await sleep(500);
 

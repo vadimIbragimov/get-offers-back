@@ -1,4 +1,4 @@
-const dataTheMarket = require('./dataTheMarket.json');
+// const dataTheMarket = require('./dataTheMarket.json');
 const dataStremObzorStore = require('./dataStremObzorStore.json');
 let concatArr = dataTheMarket.concat(dataStremObzorStore);
 
