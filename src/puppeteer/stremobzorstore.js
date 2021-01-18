@@ -83,11 +83,11 @@ async function getPage(){
             console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
         }
 
-        await scroll.autoScroll(page); 
+        await scroll.scrollPageToBottom(page); 
         // const scrollStep = 250 // default
         // const scrollDelay = 100 // default
         // await scrollPageToBottom(page, scrollStep, scrollDelay)
-<<<<<<< HEAD
+
         // await function autoScroll(page){
         //     const scrollStep = 250 // default
         //     const scrollDelay = 100 // default
@@ -95,18 +95,17 @@ async function getPage(){
         //     scrollStep -= 20;
         // }
         
-=======
 
 
 
 
-        const scrollStep = 250 // default
-        const scrollDelay = 10  // default
 
-        await puppeteerAutoscrollDown(page, scrollStep, scrollDelay);
+        // const scrollStep = 250 // default
+        // const scrollDelay = 10  // default
 
->>>>>>> 12fa3830cc15d3629877495b18f2297b30078046
-        await sleep(500);
+        // await puppeteerAutoscrollDown(page, scrollStep, scrollDelay);
+
+        // await sleep(500);
 
         //собираем посты
         const result = await page.$$eval('.post', parseFunc);
@@ -153,7 +152,7 @@ const parseFunc = (elements) => {
                     price: lookforprice(texthtml),
 
                     // customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
-                    // post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
+                    post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
 
                 });
                 break;

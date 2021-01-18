@@ -1,21 +1,21 @@
-async function autoScroll(page){
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 130;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                    window.scrollBy(0, distance);
-                    totalHeight += distance;
+// async function autoScroll(page){
+//     await page.evaluate(async () => {
+//         await new Promise((resolve, reject) => {
+//             var totalHeight = 0;
+//             var distance = 130;
+//             var timer = setInterval(() => {
+//                 var scrollHeight = document.body.scrollHeight;
+//                     window.scrollBy(0, distance);
+//                     totalHeight += distance;
                     
-                if(totalHeight*1.1 >= scrollHeight){ //1.013(примерно 10 дней)
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 100);
-        });
-    });
-}
+//                 if(totalHeight*1.1 >= scrollHeight){ //1.013(примерно 10 дней)
+//                     clearInterval(timer);
+//                     resolve();
+//                 }
+//             }, 100);
+//         });
+//     });
+// }
 
 // async function autoScroll(page) {
 //     const distance = 10; // should be less than or equal to window.innerHeight
@@ -25,11 +25,45 @@ async function autoScroll(page){
 //       await page.waitFor(delay);
 //     }
 // }
+async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 100) {
+    const lastPosition = await page.evaluate(
+      async (step, delay) => {
+        const getScrollHeight = (element) => {
+          if (!element) return 0
+  
+          const { scrollHeight, offsetHeight, clientHeight } = element
+          return Math.max(scrollHeight, offsetHeight, clientHeight)
+        }
+  
+        const position = await new Promise((resolve) => {
+          let count = 0
+          const intervalId = setInterval(() => {
+            const { body } = document
+            const availableScrollHeight = getScrollHeight(body)
+  
+            window.scrollBy(0, step)
+            count += 1
+  
+            if (count >= 100) {
+              clearInterval(intervalId)
+              resolve(count)
+            }
+          }, delay)
+        })
+  
+        return position
+      },
+      scrollStep,
+      scrollDelay
+    )
+    return lastPosition
+  }
+  
+  module.exports = {scrollPageToBottom}
 
-
-module.exports =  {
-    autoScroll
-}
+// module.exports =  {
+//     autoScroll
+// }
 // const puppeteer = require('puppeteer');
 // var puppeteerAutoscrollDown = require("puppeteer-autoscroll-down");
 // const config = require('./config.json');
