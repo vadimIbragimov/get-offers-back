@@ -83,7 +83,21 @@ async function getPage(){
             console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
         }
 
-        await scroll.scrollPageToBottom(page); 
+
+
+        // while (counter < 1000) {
+            const container = await page.$eval('.post', (el) => {
+                return el;
+            });
+            const doc = await page.evaluate(() => {return document});
+            await scroll.scrollToBottomSmoothPromise(container, 30, 3000, doc);
+            // const date = await page.$$eval('.post', );
+            // //смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
+            // if(){
+            //     break;
+            // }
+        // }
+         
         // const scrollStep = 250 // default
         // const scrollDelay = 100 // default
         // await scrollPageToBottom(page, scrollStep, scrollDelay)
@@ -95,11 +109,6 @@ async function getPage(){
         //     scrollStep -= 20;
         // }
         
-
-
-
-
-
         // const scrollStep = 250 // default
         // const scrollDelay = 10  // default
 
@@ -108,7 +117,11 @@ async function getPage(){
         // await sleep(500);
 
         //собираем посты
+
+
+
         const result = await page.$$eval('.post', parseFunc);
+
 
         return result;
     }
@@ -163,3 +176,14 @@ const parseFunc = (elements) => {
     return data;
 }
 
+
+// const parseFuncLastPostDate = (elements) => {
+//     for (const el of elements){
+//         let texthtml = el.querySelector('.wall_post_text').innerText;
+//         for (let i of texthtml){
+//             if (i){
+//                 return el.querySelector('.rel_date').innerText;
+//             }
+//         }
+//     }
+// }

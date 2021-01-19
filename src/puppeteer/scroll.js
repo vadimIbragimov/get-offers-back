@@ -25,6 +25,9 @@
 //       await page.waitFor(delay);
 //     }
 // }
+
+
+
 async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 100) {
     const lastPosition = await page.evaluate(
       async (step, delay) => {
@@ -59,7 +62,7 @@ async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 100) {
     return lastPosition
   }
   
-  module.exports = {scrollPageToBottom}
+  // module.exports = {scrollPageToBottom}
 
 // module.exports =  {
 //     autoScroll
@@ -81,3 +84,35 @@ async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 100) {
     
 //     await browser.close()
 // })
+
+async function scrollToBottomSmoothPromise(container, quantity, iterationTimeout, doc) {
+  return new Promise(resolve => {
+      setTimeout(() => scrollToBottomSmooth(container, () => resolve(container), null, quantity, iterationTimeout, doc, page), 1000);
+  });
+}
+
+ async function scrollToBottomSmooth(container, callback, tempBlock, quantity, iterationTimeout, doc ) {
+    if (quantity === 0) {
+        callback();
+        return;
+    }
+    if (!tempBlock) {
+      
+      tempBlock = doc.createElement('div');
+      container.append(tempBlock);
+  }
+
+    const scrollHeight = container.scrollHeight;
+    tempBlock.scrollIntoView({behavior: 'smooth', block: 'center'});
+    setTimeout(() => {
+        tempBlock.remove();
+        if (container.scrollHeight > scrollHeight && (quantity > 1 || quantity < 0)) {
+            container.append(tempBlock);
+            scrollToBottomSmooth(container, callback, tempBlock, --quantity, iterationTimeout);
+        } else {
+            callback();
+        }
+    }, iterationTimeout);
+}
+
+module.exports = {scrollToBottomSmoothPromise}
