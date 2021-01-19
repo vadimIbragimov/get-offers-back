@@ -28,7 +28,7 @@
 
 
 
-async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 100) {
+async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 50) {
     const lastPosition = await page.evaluate(
       async (step, delay) => {
         const getScrollHeight = (element) => {
@@ -87,18 +87,17 @@ async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 100) {
 
 async function scrollToBottomSmoothPromise(container, quantity, iterationTimeout, doc) {
   return new Promise(resolve => {
-      setTimeout(() => scrollToBottomSmooth(container, () => resolve(container), null, quantity, iterationTimeout, doc, page), 1000);
+      setTimeout(() => scrollToBottomSmooth(container, () => resolve(container), null, quantity, iterationTimeout, doc), 1000);
   });
 }
 
- async function scrollToBottomSmooth(container, callback, tempBlock, quantity, iterationTimeout, doc ) {
+ function scrollToBottomSmooth(container, callback, tempBlock, quantity, iterationTimeout, doc ) {
     if (quantity === 0) {
         callback();
         return;
     }
     if (!tempBlock) {
-      
-      tempBlock = doc.createElement('div');
+      tempBlock = doc;
       container.append(tempBlock);
   }
 
@@ -115,4 +114,4 @@ async function scrollToBottomSmoothPromise(container, quantity, iterationTimeout
     }, iterationTimeout);
 }
 
-module.exports = {scrollToBottomSmoothPromise}
+module.exports = {scrollPageToBottom}

@@ -64,7 +64,7 @@ async function getPage(){
             //рабочий Chromium
             // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
             // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-            headless: true,
+            headless: false,
         });
         return browser
     }
@@ -84,19 +84,24 @@ async function getPage(){
         }
 
 
+        let counter = 0;
 
-        // while (counter < 1000) {
-            const container = await page.$eval('.post', (el) => {
-                return el;
-            });
-            const doc = await page.evaluate(() => {return document});
-            await scroll.scrollToBottomSmoothPromise(container, 30, 3000, doc);
-            // const date = await page.$$eval('.post', );
-            // //смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
-            // if(){
-            //     break;
-            // }
-        // }
+        while (counter < 100) {
+            // const container = await page.evaluate(() => {return document.body.innerHTML});
+   
+            // const doc = await page.evaluate(() => {return document.createElement('div')});
+            // await scroll.scrollToBottomSmoothPromise(container, 30, 3000, doc);
+            await scroll.scrollPageToBottom(page);
+            const date = await page.$$eval('.post', parseFuncLastPostDate);
+            console.log(date);
+            counter += 1;
+            
+            //17 янв в 23:03
+            //смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
+            if(date == "вчера в 1:04"){
+                break;
+            }
+        }
          
         // const scrollStep = 250 // default
         // const scrollDelay = 100 // default
@@ -177,13 +182,52 @@ const parseFunc = (elements) => {
 }
 
 
-// const parseFuncLastPostDate = (elements) => {
-//     for (const el of elements){
-//         let texthtml = el.querySelector('.wall_post_text').innerText;
-//         for (let i of texthtml){
-//             if (i){
-//                 return el.querySelector('.rel_date').innerText;
-//             }
-//         }
-//     }
-// }
+const parseFuncLastPostDate = (elements) => {
+    let lastDatePost = '';
+    for (const el of elements){
+        
+        // if(el == elements[elements.length - 1]){
+            let texthtml = el.querySelector('.wall_post_text').innerText;
+            for (let i of texthtml){
+                if (i){
+                    lastDatePost = el.querySelector('.rel_date').innerText;
+                }
+            }
+        // }
+        
+
+    }
+    return lastDatePost;
+}
+
+
+
+const convertData = (e) => {
+    let newStrDate = e.split(" ")
+    let day = Number(newStrDate[0]);
+    let month = newStrDate[1];
+    let arrMonth = {
+        "янв" : 0,
+        "фев" : 1,
+        "мар" : 2,
+        "апр" : 3,
+        "май" : 4,
+        "июн" : 5,
+        "июл" : 6,
+        "авг" : 7,
+        "сен" : 8,
+        "окт" :  9,
+        "ноя" :  10,
+        "дек" :  11
+    };
+
+    for (let i in arrMonth){
+        if (month == i){
+            month = arrMonth[i];
+        }
+    }
+     
+    let newDate = new Date(2021, month, day);
+    return newDate;
+    
+}
