@@ -15,9 +15,9 @@ async function autoScroll(page: any, scrollStep: number = 250, scrollDelay: numb
             const availableScrollHeight = getScrollHeight(body)
   
             window.scrollBy(0, step)
-            count += step
+            count += 1
 
-            if (count >= availableScrollHeight) {
+            if (count >= 100) {
               clearInterval(intervalId)
               resolve(count)
             }
