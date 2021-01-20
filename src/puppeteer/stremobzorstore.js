@@ -86,7 +86,7 @@ async function getPage(){
 
         let counter = 0;
 
-        while (counter < 100) {
+        while (counter < 5000) {
             // const container = await page.evaluate(() => {return document.body.innerHTML});
    
             // const doc = await page.evaluate(() => {return document.createElement('div')});
@@ -98,7 +98,12 @@ async function getPage(){
             
             //17 янв в 23:03
             //смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
-            if(date == "вчера в 1:04"){
+
+            let todayDate = new Date();
+            let todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30));
+            let oneMonthPeriod = new Date(todayMinusOneMonth);
+
+            if(convertData(date) > oneMonthPeriod){
                 break;
             }
         }
@@ -204,30 +209,44 @@ const parseFuncLastPostDate = (elements) => {
 
 const convertData = (e) => {
     let newStrDate = e.split(" ")
-    let day = Number(newStrDate[0]);
-    let month = newStrDate[1];
-    let arrMonth = {
-        "янв" : 0,
-        "фев" : 1,
-        "мар" : 2,
-        "апр" : 3,
-        "май" : 4,
-        "июн" : 5,
-        "июл" : 6,
-        "авг" : 7,
-        "сен" : 8,
-        "окт" :  9,
-        "ноя" :  10,
-        "дек" :  11
-    };
-
-    for (let i in arrMonth){
-        if (month == i){
-            month = arrMonth[i];
+    if(Number(newStrDate[0])){
+        let day = Number(newStrDate[0]);
+        let month = newStrDate[1];
+        let arrMonth = {
+            "янв" : 0,
+            "фев" : 1,
+            "мар" : 2,
+            "апр" : 3,
+            "май" : 4,
+            "июн" : 5,
+            "июл" : 6,
+            "авг" : 7,
+            "сен" : 8,
+            "окт" :  9,
+            "ноя" :  10,
+            "дек" :  11
+        };
+    
+        for (let i in arrMonth){
+            if (month == i){
+                month = arrMonth[i];
+            }
         }
+        let today = new Date();
+        
+        let year = today.getFullYear();
+        let newDate = new Date(year, month, day);
+        if (today.getMonth() - newDate.getMonth() < 0){
+            year = year - 1;
+            newDate = new Date(year, month, day);
+        }
+        // let daysLag = Math.ceil(Math.abs(today.getTime() - newDate.getTime()) / (1000 * 3600 * 24));
+        console.log(newDate);
+        return newDate;
     }
-     
-    let newDate = new Date(2021, month, day);
-    return newDate;
+    else{
+        return null;
+    }
+    
     
 }
