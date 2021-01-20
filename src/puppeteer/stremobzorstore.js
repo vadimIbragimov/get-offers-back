@@ -64,7 +64,7 @@ async function getPage(){
             //рабочий Chromium
             // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
             // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-            headless: false,
+            headless: true,
         });
         return browser
     }
@@ -85,7 +85,9 @@ async function getPage(){
 
 
         let counter = 0;
-
+        let todayDate = new Date();
+        let todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30));
+        let oneMonthPeriod = new Date(todayMinusOneMonth);
         while (counter < 5000) {
             // const container = await page.evaluate(() => {return document.body.innerHTML});
    
@@ -93,18 +95,16 @@ async function getPage(){
             // await scroll.scrollToBottomSmoothPromise(container, 30, 3000, doc);
             await scroll.scrollPageToBottom(page);
             const date = await page.$$eval('.post', parseFuncLastPostDate);
-            console.log(date);
+            // console.log(date);
             counter += 1;
             
             //17 янв в 23:03
             //смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
 
-            let todayDate = new Date();
-            let todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30));
-            let oneMonthPeriod = new Date(todayMinusOneMonth);
 
-            if(convertData(date) > oneMonthPeriod){
-                break;
+            // console.log(oneMonthPeriod);
+            if(convertData(date) < oneMonthPeriod){
+                break
             }
         }
          
@@ -193,11 +193,11 @@ const parseFuncLastPostDate = (elements) => {
         
         // if(el == elements[elements.length - 1]){
             let texthtml = el.querySelector('.wall_post_text').innerText;
-            for (let i of texthtml){
-                if (i){
+            // for (let i of texthtml){
+            //     if (i){
                     lastDatePost = el.querySelector('.rel_date').innerText;
-                }
-            }
+                // }
+            // }
         // }
         
 
@@ -241,11 +241,8 @@ const convertData = (e) => {
             newDate = new Date(year, month, day);
         }
         // let daysLag = Math.ceil(Math.abs(today.getTime() - newDate.getTime()) / (1000 * 3600 * 24));
-        console.log(newDate);
+        // console.log(newDate);
         return newDate;
-    }
-    else{
-        return null;
     }
     
     
