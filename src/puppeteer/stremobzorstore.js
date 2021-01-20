@@ -23,17 +23,28 @@ const sleep = (ms) => new Promise( (res) => {
         console.log('PAGE.LOG', msg.text());
     })
     //пока что заходим с авторизацией в VK, на сервере настроим без авторизации, тк везде настройки индивидуальные 
-    await page.$eval('#index_email', (elem, login) => {
-        elem.value = login;
-    }, config.login);
-    await page.$eval('#index_pass', (elem, password) => {
-        elem.value = password;
-    }, config.password);
+    // await page.$eval('#index_email', (elem, login) => {
+    //     elem.value = login;
+    // }, config.login);
+    // await page.$eval('#index_pass', (elem, password) => {
+    //     elem.value = password;
+    // }, config.password);
 
-    await page.click('#index_login_button');
-    await page.waitForNavigation();
+    // await page.click('#index_login_button');
+    // await page.waitForNavigation();
     //https://vk.com/shmotki_shmotochki
-    const pageURL = 'https://vk.com/shmotki_shmotochki';
+    // https://vk.com/getsneakers
+    // https://vk.com/stocksaintpetersburg
+    // https://vk.com/stremobzorstore
+    // https://vk.com/krossovkee
+    // https://vk.com/hype35
+    // https://vk.com/fa_sales
+    // https://vk.com/sneakersale*
+    // https://vk.com/baraholkacasualnaya*
+    // https://vk.com/marktplc
+    // https://vk.com/brahand*
+    // https://vk.com/resellpoint
+    const pageURL = 'https://vk.com/resellpoint';
     
 
 
@@ -86,7 +97,7 @@ async function getPage(){
 
         let counter = 0;
         let todayDate = new Date();
-        let todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30));
+        let todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 10));
         let oneMonthPeriod = new Date(todayMinusOneMonth);
         while (counter < 5000) {
             // const container = await page.evaluate(() => {return document.body.innerHTML});
@@ -170,12 +181,9 @@ const parseFunc = (elements) => {
             if (i){
                 data.push({
                     text: texthtml + spantext,
-                    // text2: spantext,
                     data: el.querySelector('.rel_date').innerText,
                     price: lookforprice(texthtml),
-
-                    // customer: 'https://vk.com' + el.querySelector('.wall_signed_by').getAttribute("href"),
-                    // post: 'https://vk.com' + el.querySelector('.post_image').getAttribute("href") + '?w=wall' + el.querySelector('._post').getAttribute('data-post-id')
+                    post: `https://vk.com/${el.querySelector('.post_header_info>.post_author>.author').getAttribute("href")}?w=wall${el.querySelector('._post_content>.post_header>.post_image>img').getAttribute("data-post-id")}`
 
                 });
                 break;
