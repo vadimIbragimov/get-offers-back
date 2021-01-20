@@ -32,8 +32,8 @@ const sleep = (ms) => new Promise( (res) => {
 
     await page.click('#index_login_button');
     await page.waitForNavigation();
-
-    const pageURL = 'https://vk.com/stremObzorStore';
+    //https://vk.com/shmotki_shmotochki
+    const pageURL = 'https://vk.com/shmotki_shmotochki';
     
 
 
@@ -64,7 +64,7 @@ async function getPage(){
             //рабочий Chromium
             // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
             // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-            headless: false,
+            headless: true,
         });
         return browser
     }
@@ -95,14 +95,14 @@ async function getPage(){
             // await scroll.scrollToBottomSmoothPromise(container, 30, 3000, doc);
             await scroll.scrollPageToBottom(page);
             const date = await page.$$eval('.post', parseFuncLastPostDate);
-            // console.log(date);
+            console.log(date);
             counter += 1;
             
             //17 янв в 23:03
             //смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
 
 
-            // console.log(oneMonthPeriod);
+            console.log(oneMonthPeriod);
             if(convertData(date) < oneMonthPeriod){
                 break
             }
@@ -241,7 +241,7 @@ const convertData = (e) => {
             newDate = new Date(year, month, day);
         }
         // let daysLag = Math.ceil(Math.abs(today.getTime() - newDate.getTime()) / (1000 * 3600 * 24));
-        // console.log(newDate);
+        console.log(newDate);
         return newDate;
     }
     

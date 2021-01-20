@@ -45,9 +45,9 @@ async function scrollPageToBottom(page, scrollStep = 250, scrollDelay = 50) {
             const availableScrollHeight = getScrollHeight(body)
   
             window.scrollBy(0, step)
-            count += step
+            count += 1
 
-            if (count >= availableScrollHeight) {
+            if (count >= 100) {
               clearInterval(intervalId)
               resolve(count)
             }
