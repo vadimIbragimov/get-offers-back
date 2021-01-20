@@ -64,7 +64,7 @@ async function getPage(){
             //рабочий Chromium
             // executablePath: '/Program Files (x86)/Chromium/Application/chrome.exe',
             // userDataDir: "/Users/user/AppData/Local/Chromium/User Data/Profile 1",
-            headless: true,
+            headless: false,
         });
         return browser
     }
