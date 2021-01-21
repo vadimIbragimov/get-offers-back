@@ -32,6 +32,7 @@ const sleep = (ms) => new Promise( (res) => {
 
     // await page.click('#index_login_button');
     // await page.waitForNavigation();
+    // https://vk.com/tmrkt
     //https://vk.com/shmotki_shmotochki
     // https://vk.com/getsneakers
     // https://vk.com/stocksaintpetersburg
@@ -44,7 +45,7 @@ const sleep = (ms) => new Promise( (res) => {
     // https://vk.com/marktplc
     // https://vk.com/brahand*
     // https://vk.com/resellpoint
-    const pageURL = 'https://vk.com/resellpoint';
+    const pageURL = 'https://vk.com/tmrkt';
     
 
 
@@ -151,46 +152,51 @@ async function getPage(){
 const parseFunc = (elements) => {
     const data = [];
     for (const el of elements){
-        let texthtml = el.querySelector('.wall_post_text').innerText;
-        let spantext = '';
-
-        if(el.querySelector('.wall_post_more')){
-            spantext = el.querySelector('.wall_post_text>span').innerText;
-        }        
-        // let newtext = '';
-        // let br = /<br>/gi;
-        // let newStr = texthtml.replace(br, ' ');
-        const lookforprice = (text) =>{
-            var numEl = '';
-            if(parseInt(text.match(/\d{5}/)) ){
-                numEl = parseInt(text.match(/\d{5}/));
+        if(el.querySelector('.wall_post_text') && el.querySelector('.post_link>.rel_date')){
+            let html = el.querySelector('.wall_post_text').innerText;
+            let texthtml = html.replace(/\n/gi, ' ');
+            let spantext = '';
+    
+            if(el.querySelector('.wall_post_more')){
+                let str = el.querySelector('.wall_post_text>span').innerHTML;
+                spantext = str.replace(/<br>/gi, ' ');
+            }        
+            // let newtext = '';
+            // let br = /<br>/gi;
+            // let newStr = texthtml.replace(br, ' ');
+            const lookforprice = (text) =>{
+                var numEl = '';
+                if(parseInt(text.match(/\d{5}/)) ){
+                    numEl = parseInt(text.match(/\d{5}/));
+                }
+                else if(parseInt(text.match(/\d{4}/)) ) {
+                    numEl = parseInt(text.match(/\d{4}/));
+                }
+                else if(parseInt(text.match(/\d{3}/)) ) {
+                    numEl = parseInt(text.match(/\d{3}/));
+                }
+                else{
+                    numEl = '-';
+                }
+                return numEl;
             }
-            else if(parseInt(text.match(/\d{4}/)) ) {
-                numEl = parseInt(text.match(/\d{4}/));
+    
+            for (let i of texthtml){
+                if (i){
+                    data.push({
+                        text: texthtml + spantext,
+                        data: el.querySelector('.post_link>.rel_date').innerText,
+                        price: lookforprice(texthtml),
+                        post: `https://vk.com/${el.querySelector('.post_header_info>.post_author>.author').getAttribute("href")}?w=wall${el.querySelector('._post_content>.post_header>.post_image>img').getAttribute("data-post-id")}`
+    
+                    });
+                    break;
+                }
+                // newtext += i;
             }
-            else if(parseInt(text.match(/\d{3}/)) ) {
-                numEl = parseInt(text.match(/\d{3}/));
-            }
-            else{
-                numEl = '-';
-            }
-            return numEl;
+        }
         }
 
-        for (let i of texthtml){
-            if (i){
-                data.push({
-                    text: texthtml + spantext,
-                    data: el.querySelector('.rel_date').innerText,
-                    price: lookforprice(texthtml),
-                    post: `https://vk.com/${el.querySelector('.post_header_info>.post_author>.author').getAttribute("href")}?w=wall${el.querySelector('._post_content>.post_header>.post_image>img').getAttribute("data-post-id")}`
-
-                });
-                break;
-            }
-            // newtext += i;
-        }
-    }
     return data;
 }
 
@@ -199,13 +205,13 @@ const parseFuncLastPostDate = (elements) => {
     let lastDatePost = '';
     for (const el of elements){
         
-        // if(el == elements[elements.length - 1]){
-            let texthtml = el.querySelector('.wall_post_text').innerText;
+        if(el.querySelector('.rel_date')){
+            // let texthtml = el.querySelector('.wall_post_text').innerText;
             // for (let i of texthtml){
             //     if (i){
                     lastDatePost = el.querySelector('.rel_date').innerText;
                 // }
-            // }
+            }
         // }
         
 
