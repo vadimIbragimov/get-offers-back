@@ -8,13 +8,13 @@ export const stremObzorStore = (elements: Element[]) => {
 
         if((el.querySelector('.wall_post_text') as HTMLElement) && (el.querySelector('.post_link>.rel_date') as HTMLElement)){
 
-            let html: string = (el.querySelector('.wall_post_text') as HTMLElement).innerText;
-            let texthtml: string = html.replace(/\n/gi, ' ');
+            const html: string = (el.querySelector('.wall_post_text') as HTMLElement).innerText;
+            const texthtml: string = html.replace(/\n/gi, ' ');
 
             let spantext: string = '';
             if(el.querySelector('.wall_post_more') as HTMLElement){
-                let str = (el.querySelector('.wall_post_text>span') as HTMLElement).innerHTML;
-                spantext = str.replace(/<br>/gi, ' '); 
+                const str = (el.querySelector('.wall_post_text>span') as HTMLElement).innerHTML;
+                spantext = str.replace(/<br>/gi, ' ');
 
             }
 

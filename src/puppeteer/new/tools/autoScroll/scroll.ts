@@ -3,17 +3,17 @@ async function autoScroll(page: any, scrollStep: number = 250, scrollDelay: numb
       async (step: any, delay: any) => {
         const getScrollHeight = (element: any) => {
           if (!element) return 0
-  
+
           const { scrollHeight, offsetHeight, clientHeight } = element
           return Math.max(scrollHeight, offsetHeight, clientHeight)
         }
-  
+
         const position = await new Promise((resolve) => {
           let count = 0
           const intervalId = setInterval(() => {
             const { body } = document
             const availableScrollHeight = getScrollHeight(body)
-  
+
             window.scrollBy(0, step)
             count += 1
 
@@ -23,7 +23,7 @@ async function autoScroll(page: any, scrollStep: number = 250, scrollDelay: numb
             }
           }, delay)
         })
-  
+
         return position
       },
       scrollStep,

@@ -2,7 +2,7 @@ type groupType = {
     href: string,
 }
 
-export type groupNameType = 'tmrkt' |  
+export type groupNameType = 'tmrkt' |
                             'stremobzorstore' |
                             'shmotki' |
                             'getsneakers' |
@@ -67,7 +67,7 @@ export default groupsList;
 
 
 
-    //https://vk.com/shmotki_shmotochki
+    // https://vk.com/shmotki_shmotochki
     // https://vk.com/getsneakers
     // https://vk.com/stocksaintpetersburg
 // **

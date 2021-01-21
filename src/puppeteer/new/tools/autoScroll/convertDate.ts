@@ -1,9 +1,9 @@
 const convertData = (e: string) => {
-    let newStrDate = e.split(" ")
+    const newStrDate = e.split(" ")
     if(Number(newStrDate[0])){
-        let day: number = Number(newStrDate[0]);
+        const day: number = Number(newStrDate[0]);
         let month: any = newStrDate[1];
-        let arrMonth: any = {
+        const arrMonth: any = {
             "янв" : 0,
             "фев" : 1,
             "мар" : 2,
@@ -19,11 +19,11 @@ const convertData = (e: string) => {
         };
         let i : any
         for (i  in arrMonth){
-            if (month == i){
+            if (month === i){
                 month = arrMonth[i];
             }
         }
-        let today: Date = new Date();
+        const today: Date = new Date();
         let year = today.getFullYear();
         let newDate: Date = new Date(year, month, day);
         if (today.getMonth() - newDate.getMonth() < 0){

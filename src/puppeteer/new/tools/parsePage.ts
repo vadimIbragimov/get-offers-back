@@ -15,18 +15,18 @@ export async function parsePage(page: Page, pageURL: string, parseFunc: () => ob
     }
     /*---------------------НОВЫЙ СКРОЛЛ, НУЖНО ТЕСТИТЬ---------------------- */
     let counter: number = 0;
-    let todayDate: Date = new Date();
-    let todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30)); //вычисляем дату, которая была 30 дней назад, до нее и будем скролить
-    let oneMonthPeriod = new Date(todayMinusOneMonth); //переводим из милисекунд в обычный формат
-    
+    const todayDate: Date = new Date();
+    const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30)); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
+    const oneMonthPeriod = new Date(todayMinusOneMonth); // переводим из милисекунд в обычный формат
+
     while (counter < 5000) {
         await autoScroll(page);
         const date: string = await page.$$eval('.post', parseFuncLastPostDate); // возвращается след формат: "17 янв", наш последний пост каждого скролла
         // console.log(date);
         counter += 1;
-        //смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
+        // смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
         // console.log(oneMonthPeriod);
-        if(convertData(date) < oneMonthPeriod){ //сравнивается при каждом цикле дата последнего поста при скролле и заданая дата, в нашем случае сегодня вычесть 30 дней (переменная todayMinusOneMonth)
+        if(convertData(date) < oneMonthPeriod){ // сравнивается при каждом цикле дата последнего поста при скролле и заданая дата, в нашем случае сегодня вычесть 30 дней (переменная todayMinusOneMonth)
             break
         }
     }

@@ -1,4 +1,4 @@
-import {filterObjectType} from "../tools/filter";
+// import {filterObjectType} from "../tools/filter";
 
 export const theMarket = (elements: Element[]) => {
     const data = [];
