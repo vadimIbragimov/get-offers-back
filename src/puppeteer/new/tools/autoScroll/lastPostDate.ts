@@ -1,7 +1,13 @@
-const parseFuncLastPostDate = (elements: any) => {
+const parseFuncLastPostDate = (elements: Element[]) => {
+
     let lastDatePost:string = '';
+
     for (const el of elements){
-        lastDatePost = el.querySelector('.rel_date').innerText;
+
+        if(el.querySelector('.rel_date') as HTMLElement){
+
+            lastDatePost = (el.querySelector('.rel_date') as HTMLElement).innerText;
+        }
     }
     return lastDatePost;
 }
