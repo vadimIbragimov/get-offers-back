@@ -3,28 +3,28 @@ type groupType = {
 }
 
 export type groupNameType = 'tmrkt' |
-                            'stremobzorstore' |
-                            'shmotki' |
-                            'getsneakers' |
-                            'stocksaintpetersburg' |
-                            'stockmsk' |
-                            'krossovkee' |
-                            'hype35' |
-                            'fa_sales' |
-                            'sneakersale' |
-                            'baraholkacasualnaya'|
-                            'marktplc' |
-                            'brahand'|
-                            'resellpoint';
+    'stremobzorstore' |
+    'shmotki' |
+    'getsneakers' |
+    'stocksaintpetersburg' |
+    'stockmsk' |
+    'krossovkee' |
+    'hype35' |
+    'fa_sales' |
+    'sneakersale' |
+    'baraholkacasualnaya' |
+    'marktplc' |
+    'brahand' |
+    'resellpoint';
 
 const groupsList: Record<groupNameType, groupType> = {
-    tmrkt : {
+    tmrkt: {
         href: 'tmrkt',
     },
     stremobzorstore: {
         href: 'stremobzorstore',
     },
-    shmotki : {
+    shmotki: {
         href: 'shmotki_shmotochki',
     },
     getsneakers: {
@@ -59,30 +59,7 @@ const groupsList: Record<groupNameType, groupType> = {
     },
     resellpoint: {
         href: 'resellpoint',
-    }
-
+    },
 }
 
 export default groupsList;
-
-
-
-    // https://vk.com/shmotki_shmotochki
-    // https://vk.com/getsneakers
-    // https://vk.com/stocksaintpetersburg
-// **
-    // https://vk.com/krossovkee
-
-    // https://vk.com/hype35
-
-    // https://vk.com/fa_sales
-
-    // https://vk.com/sneakersale*
-
-    // https://vk.com/baraholkacasualnaya*
-
-    // https://vk.com/marktplc
-
-    // https://vk.com/brahand*
-
-    // https://vk.com/resellpoint

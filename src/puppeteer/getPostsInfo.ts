@@ -4,7 +4,7 @@ import { parsePage } from "./tools/parsePage";
 
 // const config = require('./resources/config.json');
 
-const getPostsInfo = async (groups: groupNameType[], keyWords: string[], browser: Browser) => {
+const getPostInfo = async (groups: groupNameType[], browser: Browser) => {
 
     const result = [];
     for (const groupName of groups) {
@@ -32,5 +32,13 @@ const getPostsInfo = async (groups: groupNameType[], keyWords: string[], browser
 
     return result;
 };
+
+const getPostsInfo = async (browser: Browser) => {
+    for (const groupObjName in groupsList) {
+        const groupObj = groupsList[groupObjName as groupNameType];
+        await getPostInfo([groupObj.href as groupNameType], browser);
+    }
+};
+
 
 export default getPostsInfo;

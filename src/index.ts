@@ -9,8 +9,6 @@ import mailCredentials from  './mailCredentials';
 import puppeteer from 'puppeteer';
 import fs from 'fs';
 
-
-
 const validateEmail = (email: string) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -23,10 +21,9 @@ const transporter = nodemailer.createTransport({
     auth: mailCredentials
 });
 
-
-
 const app = express();
 const PORT = 808;
+const parsedData = {};
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -43,20 +40,20 @@ const mainFunc = async () => {
                 req.body.groups.length > 0
             ) {
                 console.log('validation ok')
-                getPostsInfo((req.body.groups as groupNameType[]), ['qwe'], browser)
-                    .then(response => {
-                        return transporter.sendMail({
-                            from: 'vkgroupparser@gmail.com',
-                            to: req.body.email,
-                            subject: "Результат парсинга",
-                            text: JSON.stringify(response),
-                            // html: "This <i>message</i> was sent from <strong>Node js</strong> server."
-                        })
-                    })
-                    .then(result => {
-                        console.log(result)
-                    })
-                    .catch(e => console.log(e))
+                // getPostsInfo((req.body.groups as groupNameType[]), ['qwe'], browser)
+                //     .then(response => {
+                //         return transporter.sendMail({
+                //             from: 'vkgroupparser@gmail.com',
+                //             to: req.body.email,
+                //             subject: "Результат парсинга",
+                //             text: JSON.stringify(response),
+                //             // html: "This <i>message</i> was sent from <strong>Node js</strong> server."
+                //         })
+                //     })
+                //     .then(result => {
+                //         console.log(result)
+                //     })
+                //     .catch(e => console.log(e))
             } else console.log('Error: validation failed');
         } else console.log('Error: blank body')
 
