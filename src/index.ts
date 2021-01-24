@@ -2,12 +2,12 @@ import '@babel/polyfill';
 import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import getPostsInfo from "./puppeteer/new/getPostsInfo";
-import { groupNameType } from "./puppeteer/new/resources/groups";
+// import getPostsInfo from "./puppeteer/new/getPostsInfo";
+// import { groupNameType } from "./puppeteer/new/resources/groups";
 import nodemailer from 'nodemailer';
 import mailCredentials from  './mailCredentials';
 import puppeteer from 'puppeteer';
-import fs from 'fs';
+// import fs from 'fs';
 
 
 
@@ -35,33 +35,33 @@ const mainFunc = async () => {
     const browser = await puppeteer.launch({
         headless: true,
     });
-    app.post('/api/parse', (req, res) => {
-        res.send();
-        if (req.body) {
-            if (
-                req.body.email?.length > 0 && validateEmail(req.body.email) &&
-                req.body.groups.length > 0
-            ) {
-                console.log('validation ok')
-                getPostsInfo((req.body.groups as groupNameType[]), ['qwe'], browser)
-                    .then(response => {
-                        return transporter.sendMail({
-                            from: 'vkgroupparser@gmail.com',
-                            to: req.body.email,
-                            subject: "Результат парсинга",
-                            text: JSON.stringify(response),
-                            // html: "This <i>message</i> was sent from <strong>Node js</strong> server."
-                        })
-                    })
-                    .then(result => {
-                        console.log(result)
-                    })
-                    .catch(e => console.log(e))
-            } else console.log('Error: validation failed');
-        } else console.log('Error: blank body')
+    // app.post('/api/parse', (req, res) => {
+    //     res.send();
+    //     if (req.body) {
+    //         if (
+    //             req.body.email?.length > 0 && validateEmail(req.body.email) &&
+    //             req.body.groups.length > 0
+    //         ) {
+    //             console.log('validation ok')
+    //             getPostsInfo((req.body.groups as groupNameType[]), ['qwe'], browser)
+    //                 .then(response => {
+    //                     return transporter.sendMail({
+    //                         from: 'vkgroupparser@gmail.com',
+    //                         to: req.body.email,
+    //                         subject: "Результат парсинга",
+    //                         text: JSON.stringify(response),
+    //                         // html: "This <i>message</i> was sent from <strong>Node js</strong> server."
+    //                     })
+    //                 })
+    //                 .then(result => {
+    //                     console.log(result)
+    //                 })
+    //                 .catch(e => console.log(e))
+    //         } else console.log('Error: validation failed');
+    //     } else console.log('Error: blank body')
 
-        console.log('Запрос: ', JSON.stringify(req.body));
-    });
+    //     console.log('Запрос: ', JSON.stringify(req.body));
+    // });
 
     app.listen(PORT, () => {
         console.log(`server started at http://localhost:${PORT}`);
