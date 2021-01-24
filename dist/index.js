@@ -7,12 +7,10 @@ require("@babel/polyfill");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
-// import getPostsInfo from "./puppeteer/new/getPostsInfo";
-// import { groupNameType } from "./puppeteer/new/resources/groups";
+const getPostsInfo_1 = __importDefault(require("./puppeteer/getPostsInfo"));
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const mailCredentials_1 = __importDefault(require("./mailCredentials"));
 const puppeteer_1 = __importDefault(require("puppeteer"));
-// import fs from 'fs';
 const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -30,32 +28,33 @@ const mainFunc = async () => {
     const browser = await puppeteer_1.default.launch({
         headless: true,
     });
-    // app.post('/api/parse', (req, res) => {
-    //     res.send();
-    //     if (req.body) {
-    //         if (
-    //             req.body.email?.length > 0 && validateEmail(req.body.email) &&
-    //             req.body.groups.length > 0
-    //         ) {
-    //             console.log('validation ok')
-    //             getPostsInfo((req.body.groups as groupNameType[]), ['qwe'], browser)
-    //                 .then(response => {
-    //                     return transporter.sendMail({
-    //                         from: 'vkgroupparser@gmail.com',
-    //                         to: req.body.email,
-    //                         subject: "Результат парсинга",
-    //                         text: JSON.stringify(response),
-    //                         // html: "This <i>message</i> was sent from <strong>Node js</strong> server."
-    //                     })
-    //                 })
-    //                 .then(result => {
-    //                     console.log(result)
-    //                 })
-    //                 .catch(e => console.log(e))
-    //         } else console.log('Error: validation failed');
-    //     } else console.log('Error: blank body')
-    //     console.log('Запрос: ', JSON.stringify(req.body));
-    // });
+    app.post('/api/parse', (req, res) => {
+        res.send();
+        if (req.body) {
+            if (req.body.email?.length > 0 && validateEmail(req.body.email) &&
+                req.body.groups.length > 0) {
+                console.log('validation ok');
+                getPostsInfo_1.default(req.body.groups, ['qwe'], browser)
+                    .then(response => {
+                    return transporter.sendMail({
+                        from: 'vkgroupparser@gmail.com',
+                        to: req.body.email,
+                        subject: "Результат парсинга",
+                        text: JSON.stringify(response),
+                    });
+                })
+                    .then(result => {
+                    console.log(result);
+                })
+                    .catch(e => console.log(e));
+            }
+            else
+                console.log('Error: validation failed');
+        }
+        else
+            console.log('Error: blank body');
+        console.log('Запрос: ', JSON.stringify(req.body));
+    });
     app.listen(PORT, () => {
         console.log(`server started at http://localhost:${PORT}`);
     });

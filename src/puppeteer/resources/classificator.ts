@@ -36,7 +36,7 @@ export const classificator = [
             },
 
         ],
-
+        
     },
     {
         id: 1,
@@ -84,7 +84,7 @@ export const classificator = [
                 regexp: /dunk/gi,
             },
         ],
-
+        
     },
     {
         id: 2,
@@ -97,7 +97,7 @@ export const classificator = [
                 regexp: /logo|bag/gi,
             },
         ],
-
+        
     },
     {
         id: 3,
@@ -110,7 +110,7 @@ export const classificator = [
             //     regexp: /logo|bag/gi,
             // },
         ],
-
+        
     },
     {
         id: 4,
@@ -123,7 +123,7 @@ export const classificator = [
             //     regexp: /logo|bag/gi,
             // },
         ],
-
+        
     },
     {
         id: 5,
@@ -136,7 +136,7 @@ export const classificator = [
                 regexp: /belt|ремень|industrial/gi,
             },
         ],
-
+        
     },
     {
         id: 6,
@@ -149,7 +149,7 @@ export const classificator = [
             //     regexp: /belt|ремень|industrial/gi,
             // },
         ],
-
+        
     },
     {
         id: 7,
@@ -360,8 +360,8 @@ export const classificator = [
             // },
         ],
     },
-
-
-
+    
+    
+    
 
 ];
