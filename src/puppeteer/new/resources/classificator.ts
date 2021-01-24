@@ -29,21 +29,12 @@ export const classificator = [
                 name: 'Alexander Wang',
                 regexp: /alexander wang|wang/gi,
             },
-            // {
-            //     id: 2,
-            //     name: 'OffWhite',
-            //     regexp: /off white|of wite|off wite|of white|of|офф вайт/gi,
-            // },
-            // {
-            //     id: 2,
-            //     name: 'SB',
-            //     regexp: /SB/gi,
-            // },
-            // {
-            //     id: 2,
-            //     name: 'Air Force',
-            //     regexp: /air force|air forc|air foce|аир форс|Af/gi,
-            // },
+            {
+                id: 5,
+                name: '700',
+                regexp: /700/gi,
+            },
+
         ],
         
     },
@@ -86,6 +77,11 @@ export const classificator = [
                 id: 6,
                 name: 'Suptempo',
                 regexp: /suptempo/gi,
+            },
+            {
+                id: 7,
+                name: 'Dunk',
+                regexp: /dunk/gi,
             },
         ],
         
@@ -130,7 +126,7 @@ export const classificator = [
         
     },
     {
-        id: 4,
+        id: 5,
         name: 'Off-White',
         regexp: /Off white|off-white/gi,
         entries: [
@@ -143,7 +139,7 @@ export const classificator = [
         
     },
     {
-        id: 5,
+        id: 6,
         name: 'The North Face',
         regexp: /thenorthface|tnf|thenorthface|тнф/gi,
         entries: [
@@ -156,7 +152,7 @@ export const classificator = [
         
     },
     {
-        id: 6,
+        id: 7,
         name: 'Rick Owens',
         regexp: /rickowens|rick owens/gi,
         entries: [
@@ -168,7 +164,7 @@ export const classificator = [
         ],
     },
     {
-        id: 7,
+        id: 8,
         name: 'Heron Preston',
         regexp: /heron preston|preston|херон престон/gi,
         entries: [
@@ -180,7 +176,7 @@ export const classificator = [
         ],
     },
     {
-        id: 8,
+        id: 9,
         name: 'Calvin Klein',
         regexp: /calvin klein|ck/gi,
         entries: [
@@ -197,7 +193,7 @@ export const classificator = [
         ],
     },
     {
-        id: 9,
+        id: 10,
         name: 'Supreme',
         regexp: /supreme|суприм|suprem/gi,
         entries: [
@@ -209,7 +205,7 @@ export const classificator = [
         ],
     },
     {
-        id: 10,
+        id: 11,
         name: 'Burberry',
         regexp: /burberry/gi,
         entries: [
@@ -221,7 +217,7 @@ export const classificator = [
         ],
     },
     {
-        id: 11,
+        id: 12,
         name: 'Lacoste',
         regexp: /lacoste|лакост|lacost/gi,
         entries: [
@@ -233,7 +229,7 @@ export const classificator = [
         ],
     },
     {
-        id: 12,
+        id: 13,
         name: 'Balenciaga',
         regexp: /balenciaga|balensiaga/gi,
         entries: [
@@ -245,7 +241,7 @@ export const classificator = [
         ],
     },
     {
-        id: 13,
+        id: 14,
         name: 'Kenzo',
         regexp: /kenzo|кензо/gi,
         entries: [
@@ -257,21 +253,9 @@ export const classificator = [
         ],
     },
     {
-        id: 14,
-        name: 'Dolce Gabbana',
-        regexp: /Dolce Gabbana|Gabbana|Dolce/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    {
         id: 15,
-        name: 'Haliky',
-        regexp: /Haliky|Dolce/gi,
+        name: 'Dolce Gabbana',
+        regexp: /Dolce Gabbana|Gabbana|Dolce|Dolce&Gabbana/gi,
         entries: [
             // {
             //     id: 0,
@@ -282,6 +266,18 @@ export const classificator = [
     },
     {
         id: 16,
+        name: 'Haliky',
+        regexp: /Haliky|Dolce/gi,
+        entries: [
+            {
+                id: 0,
+                name: 'Logo',
+                regexp: /logo|Hoodie|лого|худи/gi,
+            },
+        ],
+    },
+    {
+        id: 17,
         name: 'Bape',
         regexp: /bape/gi,
         entries: [
@@ -293,9 +289,69 @@ export const classificator = [
         ],
     },
     {
-        id: 17,
+        id: 18,
         name: 'stussy',
         regexp: /stussy/gi,
+        entries: [
+            // {
+            //     id: 0,
+            //     name: 'tee',
+            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
+            // },
+        ],
+    },
+    {
+        id: 19,
+        name: 'Champion',
+        regexp: /champion|чемпион|ch*mpion/gi,
+        entries: [
+            // {
+            //     id: 0,
+            //     name: 'tee',
+            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
+            // },
+        ],
+    },
+    {
+        id: 20,
+        name: 'Tommy Hilfiger',
+        regexp: /Tommy Hilfiger|Hilfiger/gi,
+        entries: [
+            // {
+            //     id: 0,
+            //     name: 'tee',
+            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
+            // },
+        ],
+    },
+    {
+        id: 21,
+        name: 'Fred Perry',
+        regexp: /Fred Perry|Perry/gi,
+        entries: [
+            // {
+            //     id: 0,
+            //     name: 'tee',
+            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
+            // },
+        ],
+    },
+    {
+        id: 22,
+        name: 'Levis',
+        regexp: /levis/gi,
+        entries: [
+            // {
+            //     id: 0,
+            //     name: 'tee',
+            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
+            // },
+        ],
+    },
+    {
+        id: 23,
+        name: 'Anti Social Social Club',
+        regexp: /Anti Social Social Club|ASSC|Anti Sosial Sosial Club/gi,
         entries: [
             // {
             //     id: 0,
