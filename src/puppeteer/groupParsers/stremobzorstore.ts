@@ -1,6 +1,6 @@
 // import {filterObjectType} from "../tools/filter";
 
-export const stremObzorStore = (elements: Element[]) => {
+export const stremobzorstore = (elements: Element[]) => {
 
     const data = [];
 
