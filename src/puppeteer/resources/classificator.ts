@@ -36,7 +36,8 @@ export const classificator = [
               {
                 name: "Yeezy 500",
                 regexp: [
-                    "/500/"
+                    "/500/",
+                    "/utility/"
                 ],
               },
               {
@@ -48,7 +49,9 @@ export const classificator = [
               {
                 name: "Yeezy 700",
                 regexp: [
-                    "/700/"
+                    "/700/",
+                    "/700v2/",
+                    "/700v3/",
                 ],
               },
             ]
@@ -84,6 +87,15 @@ export const classificator = [
                     "/ozweego/", 
                     "/ozwego/",
                     "/озвего/"
+                ],
+            },
+            {
+                name: "Stan Smith",
+                regexp: [
+                    "/stan/", 
+                    "/smith/", 
+                    "/стен/",
+                    "/смит/",
                 ],
             },
 
@@ -171,9 +183,22 @@ export const classificator = [
                 ],
             },
             {
+                name: "Nike x Travis Scott",
+                regexp: [
+                    "/travis/",
+                    "/scott/",
+                ],
+            },
+            {
                 name: "Suptempo",
                 regexp: [
                     "/suptempo/",
+                ],
+            },
+            {
+                name: "Sacai",
+                regexp: [
+                    "/sacai/",
                 ],
             },
             {
@@ -187,21 +212,77 @@ export const classificator = [
         ],
       },
 
+
+      {
+        id: "2",
+        name: "Anti Social Social Club",
+        brand: [
+            "/social/", 
+            "/anti/", 
+            "/assc/", 
+        ],
+        series: [
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/"
+                ],
+            },
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/тишка/", 
+                      "/футболка/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/"
+                ],
+            },
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/",
+                      "/толстовка/",
+                ],
+            },
+        ]
+      },
+
       {
         id: "2",
         name: "Alexander McQueen",
         brand: [
             "/mcqueen/", 
         ],
+        
       },
 
-      {
-        id: "3",
-        name: "Asics",
-        brand: [
-            "/asics/", 
-        ],
-      },
 
       {
         id: "4",
@@ -259,6 +340,9 @@ export const classificator = [
                       "/jacket/",
                       "/куртка/",
                       "/плащ/",
+                      "/пуховик/",
+                      "/parka/",
+                      "/парка/",
                 ],
             },
             {                
@@ -342,6 +426,8 @@ export const classificator = [
                       "/jacket/",
                       "/куртка/",
                       "/плащ/",
+                      "/parka/",
+                      "/парка/",
                 ],
             },
         ]
@@ -395,6 +481,8 @@ export const classificator = [
                       "/jacket/",
                       "/куртка/",
                       "/плащ/",
+                      "/parka/",
+                      "/парка/",
                 ],
             },
             {                
@@ -445,6 +533,58 @@ export const classificator = [
                       "/thirt/", 
                       "/тишка/", 
                       "/футболка/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/"
+                ],
+            },
+        ]
+    },
+    {
+        id: "6",
+        name: "Champion",
+        brand: [
+            "/champion/", 
+            "/chempion/", 
+            "/чемпион/", 
+        ],
+        series: [
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/тишка/", 
+                      "/футболка/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/"
+                ],
+            },
+            {                
+                name: "Jacket",
+                regexp: [
+                      "/jacket/",
+                      "/куртка/",
+                      "/плащ/",
+                      "/пуховик/",
+                      "/parka/",
+                      "/парка/",
+                ],
+            },
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
                       "/слив/",
                       "/лонг/",
                       "/лонг-слив/"
@@ -526,6 +666,19 @@ export const classificator = [
                       "/jacket/",
                       "/куртка/",
                       "/плащ/",
+                      "/parka/",
+                      "/парка/",
+                      "/пуховик/",
+                ],
+            },
+            {                
+                name: "Кроссовки",
+                regexp: [
+                      "/sneakers/", 
+                      "/кеды/", 
+                      "/кроссовки/", 
+                      "/кроссы/", 
+                      "/пара/",
                 ],
             },
         ]
@@ -558,6 +711,22 @@ export const classificator = [
                       "/лонг/",
                       "/лонг-слив/",
                       "/поло/"
+                ],
+            },
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/",
+                      "/толстовка/",
                 ],
             },
         ]
@@ -620,6 +789,162 @@ export const classificator = [
         ]
     },
 
+    {
+        id: "11",
+        name: "Gucci",
+        brand: [
+            "/gucci/", 
+            "/guci/", 
+            "/гуси/", 
+            "/гучи/",  
+        ],
+        series: [
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/",
+                      "/polo/", 
+                      "/тишка/", 
+                      "/футболка/",
+                ],
+            },
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/",
+                      "/толстовка/",
+                ],
+            },
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/"
+                ],
+            },
+            {                
+                name: "Кеды",
+                regexp: [
+                      "/sneakers/", 
+                      "/кеды/", 
+                      "/кроссовки/", 
+                      "/кроссы/", 
+                      "/пара/",
+                ],
+            },
+            {                
+                name: "Belt",
+                regexp: [
+                      "/belt/", 
+                      "/ремень/",
+                      "/пояс/",
+                ],
+            },
+            {                
+                name: "Bag / Backpack", 
+                regexp: [
+                      "/bag/", 
+                      "/backpack/",
+                      "/портфель/",
+                      "/сумка/",
+                      "/сумочка/",
+                      "/чемодан/",
+                ],
+            },
+            {                
+                name: "Gucci x The North Face", 
+                regexp: [
+                      "/tnf/", 
+                      "/north/",
+                      "/face/",
+                      "/тнф/",
+                ],
+            },
+        ]
+    },
+
+    {   
+        id: "12",
+        name: "Haliky",
+        brand: [
+            "/haliky/", 
+            "/dolce/", 
+        ],
+        series: [
+            {                
+                name: "Arabic Logo",
+                regexp: [
+                      "/arabic/", 
+                      "/logo/", 
+                      "/арабик/", 
+                ],
+            },
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/тишка/", 
+                      "/футболка/",
+                ],
+            },
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/",
+                      "/толстовка/",
+                ],
+            },
+            {                
+                name: "Hoodie",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/лонг-слив/"
+                ],
+            },
+        ]
+    },
     {
         id: "12",
         name: "Heron Preston",
@@ -868,6 +1193,8 @@ export const classificator = [
                       "/jacket/",
                       "/куртка/",
                       "/плащ/",
+                      "/parka/",
+                      "/парка/",
                 ],
             },
         ]
@@ -953,6 +1280,8 @@ export const classificator = [
                       "/jacket/",
                       "/куртка/",
                       "/плащ/",
+                      "/parka/",
+                      "/парка/",
                 ],
             },
         ]
@@ -1110,6 +1439,22 @@ export const classificator = [
         ]
     },
     {
+        id: "7",
+        name: "Rick Owens",
+        brand: [
+            "/Owens/", 
+        ],
+        series: [
+            {                
+                name: "Ramones",
+                regexp: [
+                      "/ramones/", 
+                      "/рамоны/", 
+                ],
+            },
+        ]
+    },
+    {
         id: "23",
         name: "Supreme",
         brand: [
@@ -1165,290 +1510,403 @@ export const classificator = [
             },
         ]
     },
-    
-      
+    {
+        id: "24",
+        name: "Stone Island",
+        brand: [
+            "/stone/", 
+            "/island/", 
+            "/стон/", 
+            "/айленд/", 
+        ],
+        series: [
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                ],
+            },
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/толстовка/",
+                      "/кардиган/",
+                ],
+            },
+            {                
+                name: "Jacket",
+                regexp: [
+                      "/пуховик/", 
+                      "/пухан/", 
+                      "/пуловер/", 
+                      "/jacket/",
+                      "/куртка/",
+                      "/плащ/",
+                      "/parka/",
+                      "/парка/",
+                ],
+            },
 
+        ]
+    },
+    {
+        id: "23",
+        name: "Stussy",
+        brand: [
+            "/stussy/", 
+            "/стусси/", 
+        ],
+        series: [
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/толстовка/",
+                ],
+            },
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/polo/",
+                      "/тишка/", 
+                      "/футболка/",
+                      "/поло/",
+                ],
+            },
+        ]
+    },
+    {
+        id: "24",
+        name: "Thrasher",
+        brand: [
+            "/thrasher/", 
+            "/trasher/", 
+            "/трешер/", 
+            "/трэшер/", 
+        ],
+        series: [
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/слив/",
+                      "/лонг/",
+                ],
+            },
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/polo/",
+                      "/тишка/", 
+                      "/футболка/",
+                      "/поло/",
+                ],
+            },
 
+        ]
+    },
+    {
+        id: "24",
+        name: "The North Face",
+        brand: [
+            "/north/", 
+            "/face/", 
+            "/tnf/", 
+            "/тнф/", 
+        ],
+        series: [
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                ],
+            },
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/толстовка/",
+                      "/кардиган/",
+                ],
+            },
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/polo/",
+                      "/тишка/", 
+                      "/футболка/",
+                      "/поло/",
+                ],
+            },
+            {                
+                name: "Jacket",
+                regexp: [
+                      "/jacket/",
+                      "/parka/",
+                      "/куртка/",
+                      "/плащ/",
+                      "/пуховик/",
+                      "/парка/",
+                ],
+            },
 
-    
-        
+        ]
+    },
+    {
+        id: "24",
+        name: "Travis Scott",
+        brand: [
+            "/travis/", 
+            "/scott/", 
+            "/scot/", 
+            "/стон/", 
+            "/айленд/", 
+        ],
+        series: [
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                ],
+            },
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/толстовка/",
+                      "/кардиган/",
+                ],
+            },
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/polo/",
+                      "/тишка/", 
+                      "/футболка/",
+                      "/поло/",
+                ],
+            },
 
+        ]
+    },
     {
-        id: 2,
-        name: 'Gucci',
-        regexp: /gucci|гучи|guci/gi,
-        entries: [
-            {
-                id: 0,
-                name: 'logo bag',
-                regexp: /logo|bag/gi,
+        id: "25",
+        name: "Tommy Hilfiger",
+        brand: [
+            "/tommy/", 
+            "/tomy/", 
+            "/hilfiger/", 
+            "/хилфигер/", 
+            "/томми/", 
+        ],
+        series: [
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                ],
             },
-        ],
-        
-    },
-    {
-        id: 3,
-        name: 'Stone Island',
-        regexp: /stone|island|стон|ston/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'logo bag',
-            //     regexp: /logo|bag/gi,
-            // },
-        ],
-        
-    },
-    {
-        id: 4,
-        name: 'Travis Scott',
-        regexp: /Travis|Travis Scott/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'logo bag',
-            //     regexp: /logo|bag/gi,
-            // },
-        ],
-        
-    },
-    {
-        id: 5,
-        name: 'Off-White',
-        regexp: /Off white|off-white/gi,
-        entries: [
-            {
-                id: 0,
-                name: 'belt',
-                regexp: /belt|ремень|industrial/gi,
+            {                
+                name: "Sweatshirt",
+                regexp: [
+                      "/sweatshirt/",
+                      "/свитшот/",
+                      "/свитер/",
+                      "/кофта/",
+                      "/sleeve/", 
+                      "/long/", 
+                      "/сливак/",
+                      "/слив/",
+                      "/лонг/",
+                      "/толстовка/",
+                      "/кардиган/",
+                ],
             },
-        ],
-        
-    },
-    {
-        id: 6,
-        name: 'The North Face',
-        regexp: /thenorthface|tnf|thenorthface|тнф/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'belt',
-            //     regexp: /belt|ремень|industrial/gi,
-            // },
-        ],
-        
-    },
-    {
-        id: 7,
-        name: 'Rick Owens',
-        regexp: /rickowens|rick owens/gi,
-        entries: [
-            {
-                id: 0,
-                name: 'Ramones',
-                regexp: /ramones|рамоны/gi,
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/polo/",
+                      "/тишка/", 
+                      "/футболка/",
+                      "/поло/",
+                ],
             },
-        ],
+        ]
     },
     {
-        id: 8,
-        name: 'Heron Preston',
-        regexp: /heron preston|preston|херон престон/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'Ramones',
-            //     regexp: /ramones|рамоны/gi,
-            // },
+        id: "26",
+        name: "Vans",
+        brand: [
+            "/vans/", 
+            "/vanse/", 
+            "/ванс/", 
         ],
-    },
-    {
-        id: 9,
-        name: 'Calvin Klein',
-        regexp: /calvin klein|ck/gi,
-        entries: [
-            {
-                id: 0,
-                name: 'Logo',
-                regexp: /logo|лого/gi,
+        series: [
+            {                
+                name: "Hoodies",
+                regexp: [
+                      "/hoodie/", 
+                      "/logo/", 
+                      "/худи/", 
+                      "/худак/",
+                      "/толстовка/",
+                ],
             },
-            {
-                id: 1,
-                name: 'Jeans',
-                regexp: /jeans/gi,
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/polo/",
+                      "/тишка/", 
+                      "/футболка/",
+                      "/поло/",
+                ],
             },
-        ],
-    },
-    {
-        id: 10,
-        name: 'Supreme',
-        regexp: /supreme|суприм|suprem/gi,
-        entries: [
-            {
-                id: 0,
-                name: 'Box-Logo',
-                regexp: /logo|лого|box logo|box|bogo|бого|sweatshirt|hooded/gi,
+            {                
+                name: "Кеды",
+                regexp: [
+                      "/sneakers/", 
+                      "/кеды/", 
+                      "/кроссовки/", 
+                      "/кроссы/", 
+                      "/пара/",
+                ],
             },
-        ],
+        ]
     },
     {
-        id: 11,
-        name: 'Burberry',
-        regexp: /burberry/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'Box-Logo',
-            //     regexp: /logo|лого|box logo|box|bogo|бого/gi,
-            // },
+        id: "26",
+        name: "Versace",
+        brand: [
+            "/versace/", 
+            "/versac/", 
+            "/версачи/", 
         ],
-    },
-    {
-        id: 12,
-        name: 'Lacoste',
-        regexp: /lacoste|лакост|lacost/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'Box-Logo',
-            //     regexp: /logo|лого|box logo|box|bogo|бого/gi,
-            // },
-        ],
-    },
-    {
-        id: 13,
-        name: 'Balenciaga',
-        regexp: /balenciaga|balensiaga/gi,
-        entries: [
-            {
-                id: 0,
-                name: 'tee',
-                regexp: /tee|t shirt|t-shirt|тишка/gi,
+        series: [
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/polo/",
+                      "/тишка/", 
+                      "/футболка/",
+                      "/поло/",
+                ],
             },
-        ],
+        ]
     },
     {
-        id: 14,
-        name: 'Kenzo',
-        regexp: /kenzo|кензо/gi,
-        entries: [
-            {
-                id: 0,
-                name: 'tee',
-                regexp: /tee|t shirt|t-shirt|тишка/gi,
+        id: "26",
+        name: "Vetements",
+        brand: [
+            "/vetements/", 
+        ],
+        series: [
+            {                
+                name: "T-shirt",
+                regexp: [
+                      "/t-shirt/", 
+                      "/tee/", 
+                      "/shirt/", 
+                      "/thirt/", 
+                      "/polo/",
+                      "/тишка/", 
+                      "/футболка/",
+                      "/поло/",
+                ],
             },
-        ],
-    },
-    {
-        id: 15,
-        name: 'Dolce Gabbana',
-        regexp: /Dolce Gabbana|Gabbana|Dolce|Dolce&Gabbana/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    {
-        id: 16,
-        name: 'Haliky',
-        regexp: /Haliky|Dolce/gi,
-        entries: [
-            {
-                id: 0,
-                name: 'Logo',
-                regexp: /logo|Hoodie|лого|худи/gi,
+            {                
+                name: "Jacket",
+                regexp: [
+                      "/jacket/",
+                      "/куртка/",
+                      "/плащ/",
+                      "/пуховик/",
+                      "/parka/",
+                      "/парка/",
+                ],
             },
-        ],
+        ]
     },
-    {
-        id: 17,
-        name: 'Bape',
-        regexp: /bape/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    {
-        id: 18,
-        name: 'stussy',
-        regexp: /stussy/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    {
-        id: 19,
-        name: 'Champion',
-        regexp: /champion|чемпион|ch*mpion/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    {
-        id: 20,
-        name: 'Tommy Hilfiger',
-        regexp: /Tommy Hilfiger|Hilfiger/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    {
-        id: 21,
-        name: 'Fred Perry',
-        regexp: /Fred Perry|Perry/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    {
-        id: 22,
-        name: 'Levis',
-        regexp: /levis/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    {
-        id: 23,
-        name: 'Anti Social Social Club',
-        regexp: /Anti Social Social Club|ASSC|Anti Sosial Sosial Club/gi,
-        entries: [
-            // {
-            //     id: 0,
-            //     name: 'tee',
-            //     regexp: /tee|t shirt|t-shirt|тишка/gi,
-            // },
-        ],
-    },
-    
-    
-    
-
 ];
