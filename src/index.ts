@@ -1,9 +1,11 @@
+/* eslint-disable no-useless-escape */
 import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import getPostsInfo from "./puppeteer/getPostsInfo";
 // import { groupNameType } from "./puppeteer/resources/groups";
 import puppeteer from 'puppeteer';
+import { classificator } from "./puppeteer/resources/classificator";
 
 const validateEmail = (email: string) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -12,7 +14,7 @@ const validateEmail = (email: string) => {
 
 const app = express();
 const PORT = 808;
-let parsedData: { name: string; data: object; }[] = [];
+let parsedData: { name: string; data: any; }[] = [];
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -35,6 +37,10 @@ const mainFunc = async () => {
 
     //Запускаем сканирование 
     parsePages();
+
+    app.get('/api/classificator', (req, res) => {
+        res.send(classificator);
+    });
 
     app.post('/api/parse', (req, res) => {
         if (req.body) {

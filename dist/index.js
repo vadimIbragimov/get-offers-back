@@ -3,12 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/* eslint-disable no-useless-escape */
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const getPostsInfo_1 = __importDefault(require("./puppeteer/getPostsInfo"));
 // import { groupNameType } from "./puppeteer/resources/groups";
 const puppeteer_1 = __importDefault(require("puppeteer"));
+const classificator_1 = require("./puppeteer/resources/classificator");
 const validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -34,6 +36,9 @@ const mainFunc = async () => {
     };
     //Запускаем сканирование 
     parsePages();
+    app.get('/api/classificator', (req, res) => {
+        res.send(classificator_1.classificator);
+    });
     app.post('/api/parse', (req, res) => {
         if (req.body) {
             if (req.body.email?.length > 0 && validateEmail(req.body.email) &&

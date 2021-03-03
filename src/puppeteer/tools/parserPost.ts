@@ -1,6 +1,6 @@
 // import {filterObjectType} from "../tools/filter";
 
-export const stremobzorstore = (elements: Element[]) => {
+export const parserPost = (elements: Element[]) => {
 
     const data = [];
 
@@ -11,7 +11,7 @@ export const stremobzorstore = (elements: Element[]) => {
             const html: string = (el.querySelector('.wall_post_text') as HTMLElement).innerText;
             const texthtml: string = html.replace(/\n/gi, ' ');
 
-            let spantext: string = '';
+            let spantext = '';
             if(el.querySelector('.wall_post_more') as HTMLElement){
                 const str = (el.querySelector('.wall_post_text>span') as HTMLElement).innerHTML;
                 spantext = str.replace(/<br>/gi, ' ');
