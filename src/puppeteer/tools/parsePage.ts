@@ -2,7 +2,7 @@ import autoScroll from "./autoScroll/scroll";
 import { Page } from "puppeteer";
 import parseFuncLastPostDate from "./autoScroll/lastPostDate";
 import convertData from "./autoScroll/convertDate";
-import { parserPost } from './parserPost';
+import { parserPosts } from './parserPosts';
 
 export const parsePage = async (page: Page, pageURL: string) => {
 	try {
@@ -15,7 +15,7 @@ export const parsePage = async (page: Page, pageURL: string) => {
 	/*---------------------НОВЫЙ СКРОЛЛ, НУЖНО ТЕСТИТЬ---------------------- */
 	let counter = 0;
 	const todayDate: Date = new Date();
-	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30)); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
+	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 1)); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
 	const oneMonthPeriod = new Date(todayMinusOneMonth); // переводим из милисекунд в обычный формат
 
 	while (counter < 5000) {
@@ -37,7 +37,7 @@ export const parsePage = async (page: Page, pageURL: string) => {
 
 	// собираем посты
 	console.log('получаем данные');
-	const result = await page.$$eval('.post', parserPost);
+	const result = await page.$$eval('.post', parserPosts);
 	console.log('Данные:', result);
 
 	return result;

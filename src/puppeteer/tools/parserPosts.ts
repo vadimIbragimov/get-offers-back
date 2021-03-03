@@ -1,6 +1,6 @@
 // import {filterObjectType} from "../tools/filter";
 
-export const parserPost = (elements: Element[]) => {
+export const parserPosts = (elements: Element[]) => {
 
     const data = [];
 
