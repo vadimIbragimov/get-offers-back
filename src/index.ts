@@ -36,10 +36,19 @@ const mainFunc = async () => {
     };
 
     //Запускаем сканирование 
-    parsePages();
+    // parsePages();
 
     app.get('/api/classificator', (req, res) => {
-        res.send(classificator);
+        res.send(classificator.map((item) => ({
+            id: item.id,
+            name: item.name,
+            series: item.series?.map((seriesItem) => ({
+                name: seriesItem.name,
+                modesl: seriesItem.models?.map((modelsItem) => ({
+                    name: modelsItem.name
+                }))
+            }))
+        })));
     });
 
     app.post('/api/parse', (req, res) => {

@@ -35,9 +35,18 @@ const mainFunc = async () => {
             .finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * 12));
     };
     //Запускаем сканирование 
-    parsePages();
+    // parsePages();
     app.get('/api/classificator', (req, res) => {
-        res.send(classificator_1.classificator);
+        res.send(classificator_1.classificator.map((item) => ({
+            id: item.id,
+            name: item.name,
+            series: item.series?.map((seriesItem) => ({
+                name: seriesItem.name,
+                modesl: seriesItem.models?.map((modelsItem) => ({
+                    name: modelsItem.name
+                }))
+            }))
+        })));
     });
     app.post('/api/parse', (req, res) => {
         if (req.body) {
