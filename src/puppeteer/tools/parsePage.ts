@@ -15,7 +15,7 @@ export const parsePage = async (page: Page, pageURL: string) => {
 	/*---------------------НОВЫЙ СКРОЛЛ, НУЖНО ТЕСТИТЬ---------------------- */
 	let counter = 0;
 	const todayDate: Date = new Date();
-	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 1)); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
+	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 10)); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
 	const oneMonthPeriod = new Date(todayMinusOneMonth); // переводим из милисекунд в обычный формат
 
 	while (counter < 5000) {

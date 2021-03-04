@@ -6,8 +6,10 @@ const getPostsInfo = async (browser: Browser) => {
 	const result = [];
 	for (const group of groupsList) {
 		const page = await browser.newPage();
+		await page.setViewport({ width: 1366, height: 768});
 		const data = await parsePage(page, `https://vk.com/${group.href}`);
-		result.push({ name: group.name, data })
+		result.push({ name: group.name, data });
+		page.close();
 	}
 	return result;
 };

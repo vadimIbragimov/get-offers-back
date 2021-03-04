@@ -10,7 +10,7 @@ const convertData = (e: string) => {
         let month = today.getMonth() + 1; //January is 0!
         let year = today.getFullYear();
         let newDate: Date = new Date(year, month, date, hours, minutes);
-        console.log(newDate);
+        console.log(newDate.toString());
         return newDate;
     }
     else if(newStrDate[0] === 'вчера'){
@@ -22,8 +22,10 @@ const convertData = (e: string) => {
         let year = today.getFullYear();
         let currentDate: Date = new Date(year, month, date, hours, minutes);
         let newDate = currentDate.setDate(currentDate.getDate() - 1);
-        console.log(newDate);
-        return newDate;
+        let yesterdayDate = new Date(newDate);
+        let yesterday = yesterdayDate.toString();
+        console.log(yesterday);
+        return yesterday;
     }
 
     else if(Number(newStrDate[0])){
@@ -61,7 +63,7 @@ const convertData = (e: string) => {
             newDate = new Date(year, month, date, hours, minutes);
         }
         // console.log(newDate);
-        console.log(newDate);
+        console.log(newDate.toString());
         return newDate;
         
     }
