@@ -1,6 +1,6 @@
 const parseFuncLastPostDate = (elements: Element[]) => {
 
-    let lastDatePost:string = '';
+    let lastDatePost = '';
 
     for (const el of elements){
 

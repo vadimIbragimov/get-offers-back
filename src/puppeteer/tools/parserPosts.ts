@@ -1,5 +1,7 @@
 // import {filterObjectType} from "../tools/filter";
 
+import { parseVKDate } from "./parseVKDate";
+
 export const parserPosts = (elements: Element[]) => {
 
     const data = [];
@@ -43,7 +45,7 @@ export const parserPosts = (elements: Element[]) => {
 
                     data.push({
                         text: texthtml + spantext,
-                        date: (el.querySelector('.post_link>.rel_date') as HTMLElement).innerText,
+                        date: parseVKDate((el.querySelector('.post_link>.rel_date') as HTMLElement).innerText),
                         price: lookforprice(texthtml),
                         post: `https://vk.com/${el.querySelector('.post_header_info>.post_author>.author').getAttribute("href")}?w=wall${el.querySelector('._post_content>.post_header>.post_image>img').getAttribute("data-post-id")}`
                     });

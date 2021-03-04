@@ -3,11 +3,12 @@ import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import getPostsInfo from "./puppeteer/getPostsInfo";
-// import { groupNameType } from "./puppeteer/resources/groups";
 import puppeteer from 'puppeteer';
 import { classificator } from "./puppeteer/resources/classificator";
+import { groupsList } from "./puppeteer/resources/groups";
 
 
+const SCAN_PERIOD_HOURS = 12;
 const app = express();
 const PORT = 808;
 let parsedData: { name: string; data: any; }[] = [];
@@ -28,7 +29,7 @@ const mainFunc = async () => {
 				parsedData = data;
 			})
 			.catch(e => console.error(e))
-			.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * 12))
+			.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * SCAN_PERIOD_HOURS))
 	};
 
 	//Запускаем сканирование 
@@ -47,7 +48,9 @@ const mainFunc = async () => {
 		})));
 	});
 
-	app.post('/api/get_data', (req, res) => {
+	app.get('/api/groups', (req, res) => res.send(groupsList));
+
+	app.get('/api/get_data', (req, res) => {
 		if (req.body) {
 			if (
 				req.body.groups?.length > 0 &&

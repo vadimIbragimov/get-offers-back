@@ -3,15 +3,10 @@ import { Page } from "puppeteer";
 import parseFuncLastPostDate from "./autoScroll/lastPostDate";
 import convertData from "./autoScroll/convertDate";
 import { parserPosts } from './parserPosts';
+import { ParsedDataType } from "../types";
 
-export const parsePage = async (page: Page, pageURL: string) => {
-	try {
-		await page.goto(pageURL);
-		console.log(`Открываю страницу: ${pageURL}`);
-	}
-	catch (error) {
-		console.log(`Не удалось открыть страницу: ${pageURL} из-за ошибки: ${error}`);
-	}
+export const parsePage: (page: Page) => Promise<ParsedDataType[]> = async (page: Page) => {
+
 	/*---------------------НОВЫЙ СКРОЛЛ, НУЖНО ТЕСТИТЬ---------------------- */
 	let counter = 0;
 	const todayDate: Date = new Date();
