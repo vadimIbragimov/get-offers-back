@@ -11,10 +11,6 @@ const getPostsInfo_1 = __importDefault(require("./puppeteer/getPostsInfo"));
 // import { groupNameType } from "./puppeteer/resources/groups";
 const puppeteer_1 = __importDefault(require("puppeteer"));
 const classificator_1 = require("./puppeteer/resources/classificator");
-const validateEmail = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-};
 const app = express_1.default();
 const PORT = 808;
 let parsedData = [];
@@ -22,7 +18,7 @@ app.use(cors_1.default());
 app.use(body_parser_1.default.json());
 const mainFunc = async () => {
     const browser = await puppeteer_1.default.launch({
-        headless: true,
+        headless: false,
     });
     //Функция для периодического сканирования групп
     const parsePages = () => {
@@ -35,7 +31,7 @@ const mainFunc = async () => {
             .finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * 12));
     };
     //Запускаем сканирование 
-    // parsePages();
+    parsePages();
     app.get('/api/classificator', (req, res) => {
         res.send(classificator_1.classificator.map((item) => ({
             id: item.id,
@@ -48,10 +44,10 @@ const mainFunc = async () => {
             }))
         })));
     });
-    app.post('/api/parse', (req, res) => {
+    app.post('/api/get_data', (req, res) => {
         if (req.body) {
-            if (req.body.email?.length > 0 && validateEmail(req.body.email) &&
-                req.body.groups.length > 0) {
+            if (req.body.groups?.length > 0 &&
+                req.body.items?.length > 0) {
                 console.log('validation ok');
                 //Тут мы должны из parsedData выдернуть нужные данные, сгенерить excel и вернуть в ответ на запрос
                 res.send(parsedData);

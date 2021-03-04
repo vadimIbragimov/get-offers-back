@@ -1,7 +1,9 @@
-node_modules
-dist
+/node_modules
+/dist
 .idea
 
-src/puppeteer/dataStremObzorStore.json
-src/puppeteer/dataTheMarket.json
-src/mailCredentials.ts
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json*
+yarn.lock*
