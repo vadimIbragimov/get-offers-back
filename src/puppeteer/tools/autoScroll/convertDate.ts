@@ -1,6 +1,32 @@
 const convertData = (e: string) => {
-    const newStrDate = e.split(" ")
-    if(Number(newStrDate[0])){
+    const newStrDate = e.split(" ");
+    let today = new Date();
+    if(newStrDate[0] === 'сегодня'){
+        
+        let hoursArr = newStrDate[2].split(':');
+        let hours = Number(hoursArr[0]);
+        let minutes = Number(hoursArr[1]);
+        let date = today.getDate();
+        let month = today.getMonth() + 1; //January is 0!
+        let year = today.getFullYear();
+        let newDate: Date = new Date(year, month, date, hours, minutes);
+        console.log(newDate);
+        return newDate;
+    }
+    else if(newStrDate[0] === 'вчера'){
+        let hoursArr = newStrDate[2].split(':');
+        let hours = Number(hoursArr[0]);
+        let minutes = Number(hoursArr[1]);
+        let date = today.getDate();
+        let month = today.getMonth() + 1; //January is 0!
+        let year = today.getFullYear();
+        let currentDate: Date = new Date(year, month, date, hours, minutes);
+        let newDate = currentDate.setDate(currentDate.getDate() - 1);
+        console.log(newDate);
+        return newDate;
+    }
+
+    else if(Number(newStrDate[0])){
         const day: number = Number(newStrDate[0]);
         let month: any = newStrDate[1];
         const arrMonth: any = {
@@ -23,16 +49,24 @@ const convertData = (e: string) => {
                 month = arrMonth[i];
             }
         }
-        const today: Date = new Date();
+
+        let hoursArr = newStrDate[3].split(':');
+        let hours = Number(hoursArr[0]);
+        let minutes = Number(hoursArr[1]);
+        let date = today.getDate();
         let year = today.getFullYear();
-        let newDate: Date = new Date(year, month, day);
+        let newDate: Date = new Date(year, month, date, hours);
         if (today.getMonth() - newDate.getMonth() < 0){
             year = year - 1;
-            newDate = new Date(year, month, day);
+            newDate = new Date(year, month, date, hours, minutes);
         }
         // console.log(newDate);
+        console.log(newDate);
         return newDate;
+        
     }
+        
+
 }
 
 export default convertData;
