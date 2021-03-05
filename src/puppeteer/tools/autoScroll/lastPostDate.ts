@@ -3,7 +3,7 @@ const parseFuncLastPostDate = (elements: Element[]) => {
     let lastDatePost = '';
 
     for (const el of elements){
-
+        
         if(el.querySelector('.rel_date') as HTMLElement){
 
             lastDatePost = (el.querySelector('.rel_date') as HTMLElement).innerText;

@@ -93,6 +93,7 @@ export const parseVKDate: (stringDate: string) => number = (stringDate) => {
   if(!date) throw new Error(`
     Can not find regex for "${stringDate}"
   `);
-
+  console.log(date);
+  
   return date;
 };

@@ -44,8 +44,9 @@ export const parserPosts = (elements: Element[]) => {
                 if (character){
 
                     data.push({
+                        idPost: el.getAttribute('data-post-id'),
                         text: texthtml + spantext,
-                        date: parseVKDate((el.querySelector('.post_link>.rel_date') as HTMLElement).innerText),
+                        date: 0,/*parseVKDate((el.querySelector('.post_link>.rel_date') as HTMLElement).innerText)*/ //!!!!!!!Что-то не работает, нужно проверить!!!!!!!
                         price: lookforprice(texthtml),
                         post: `https://vk.com/${el.querySelector('.post_header_info>.post_author>.author').getAttribute("href")}?w=wall${el.querySelector('._post_content>.post_header>.post_image>img').getAttribute("data-post-id")}`
                     });
