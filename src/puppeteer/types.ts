@@ -1,4 +1,5 @@
 export type ParsedDataType = {
+  postId: string;
   text: string;
   date: number;
   price: string | number;
@@ -6,6 +7,6 @@ export type ParsedDataType = {
 };
 
 export type ParsedGroupType = {
-  group: string;
+  name: string;
   data: ParsedDataType[];
 }

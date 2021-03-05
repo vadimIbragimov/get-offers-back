@@ -1,38 +1,33 @@
-import autoScroll from "./autoScroll/scroll";
+import { autoScroll } from "./autoScroll/scroll";
 import { Page } from "puppeteer";
-import parseFuncLastPostDate from "./autoScroll/lastPostDate";
-import convertData from "./autoScroll/convertDate";
+import { getSmallPostsInfo } from "./autoScroll/getSmallPostsInfo";
 import { parserPosts } from './parserPosts';
 import { ParsedDataType } from "../types";
 
-export const parsePage: (page: Page) => Promise<ParsedDataType[]> = async (page: Page) => {
+export const parsePage: (page: Page, currentBase: string[]) => Promise<ParsedDataType[]> = async (page, currentBase) => {
 
-	/*---------------------НОВЫЙ СКРОЛЛ, НУЖНО ТЕСТИТЬ---------------------- */
 	let counter = 0;
 	const todayDate: Date = new Date();
-	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 1)); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
-	const oneMonthPeriod = new Date(todayMinusOneMonth); // переводим из милисекунд в обычный формат
+	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30)).getTime(); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
 
 	while (counter < 5000) {
-		await autoScroll(page);
-		const date: string = await page.$$eval('.post', parseFuncLastPostDate); // возвращается след формат: "17 янв", наш последний пост каждого скролла
-		// console.log(date);
 		counter += 1;
-		// смотрим на дату последнего поста, если больше определённой, то завершаем скрипт
-		// console.log(oneMonthPeriod);
-		if (convertData(date) < oneMonthPeriod) { // сравнивается при каждом цикле дата последнего поста при скролле и заданая дата, в нашем случае сегодня вычесть 30 дней (переменная todayMinusOneMonth)
-			break
+		await autoScroll(page);
+		const posts = await page.$$eval('.post .post_link>.rel_date', getSmallPostsInfo);
+
+		// Если в базе что-то есть по этой группе, то сравниваем postId, если нет, смотрим на дату поста
+		if (currentBase.length > 0) {
+			// Если находится пост из тех что уже есть в базе, останавливаем скролл
+			if (posts.filter((post) => !!currentBase.find((postid) => postid === post.postId)).length > 0) break;
+		} else {
+			// Если дата последнего поста раньше чем сегодня минус 30 дней, то останавливаем скролл
+			if (posts[posts.length - 1].date <= todayMinusOneMonth) break;
 		}
 	}
 
-	// console.log('скролим');
-	// await autoScroll(page);
-	// console.log('Пауза');
-	// await sleep(500);
-
 	// собираем посты
 	console.log('получаем данные');
-	const result = await page.$$eval('.post', parserPosts);
+	const result = await page.$$eval('.post', parserPosts, currentBase);
 	console.log('Данные:', result);
 
 	return result;

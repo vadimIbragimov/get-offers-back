@@ -6,12 +6,12 @@ import getPostsInfo from "./puppeteer/getPostsInfo";
 import puppeteer from 'puppeteer';
 import { classificator } from "./puppeteer/resources/classificator";
 import { groupsList } from "./puppeteer/resources/groups";
-
+import { ParsedGroupType } from "./puppeteer/types";
 
 const SCAN_PERIOD_HOURS = 12;
 const app = express();
 const PORT = 808;
-let parsedData: { name: string; data: any; }[] = [];
+let parsedData: ParsedGroupType[] = [];
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -23,7 +23,7 @@ const mainFunc = async () => {
 
 	//Функция для периодического сканирования групп
 	const parsePages = () => {
-		getPostsInfo(browser)
+		getPostsInfo(browser, parsedData)
 			.then(data => {
 				console.log('[parsePages] : data parsed');
 				parsedData = data;
