@@ -22,7 +22,8 @@ const threeHoursRegex = 'три часа назад';
 const fourHoursRegex = 'четыре часа назад';
 const todayAtRegex = `сегодня в ${hours24Regex}`;
 const yesterdayAtRegex = `вчера в ${hours24Regex}`;
-const factDateRegex = `\\d{1,2} (${Object.keys(arrMonths).join('|')}) в ${hours24Regex}`;
+const factDateRegex = `\\d{1,2} (${Object.keys(arrMonths).join('|')}) \\d{4}`;
+const factDateTimeRegex = `\\d{1,2} (${Object.keys(arrMonths).join('|')}) в ${hours24Regex}`;
 
 const parsers = [
   {
@@ -69,6 +70,16 @@ const parsers = [
     regex: factDateRegex,
     func: (stringDate: string) => {
       const newStrDate = stringDate.split(" ")
+      const day = Number(newStrDate[0]);
+      const month = arrMonths[newStrDate[1] as keyof typeof arrMonths];
+      const year = parseInt(newStrDate[2])
+      return new Date(year, month, day).getTime();
+    },
+  },
+  {
+    regex: factDateTimeRegex,
+    func: (stringDate: string) => {
+      const newStrDate = stringDate.split(" ")
       const timeArr = newStrDate[3].split(':');
       const day = Number(newStrDate[0]);
       const month = arrMonths[newStrDate[1] as keyof typeof arrMonths];
@@ -83,14 +94,15 @@ const parsers = [
 export const parseVKDate: (stringDate: string) => number = (stringDate) => {
   let date: number;
 
-  for (const parser of parsers){
-    if(stringDate.search(parser.regex) === 0){
+
+  for (const parser of parsers) {
+    if (stringDate.search(parser.regex) === 0) {
       date = parser.func(stringDate);
       break;
     }
   }
 
-  if(!date) throw new Error(`
+  if (!date) throw new Error(`
     Can not find regex for "${stringDate}"
   `);
 
