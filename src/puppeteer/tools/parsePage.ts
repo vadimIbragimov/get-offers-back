@@ -10,23 +10,20 @@ export const parsePage: (page: Page, currentBase: string[]) => Promise<ParsedDat
 	let counter = 0;
 	const todayDate: Date = new Date();
 	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30)).getTime(); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
-	console.log(todayMinusOneMonth);
-
+	
 	while (counter < 5000) {
 		counter += 1;
 		await autoScroll(page);
-		const posts = (await page.$$eval('.post', getSmallPostsInfo))
+		const posts = (await page.$$eval('.wall_module .post:not(.post_fixed)', getSmallPostsInfo))
 			.map((post) => ({ date: parseVKDate(post.date), postId: post.postId }));
-		console.log(posts)
 
 		// Если в базе что-то есть по этой группе, то сравниваем postId, если нет, смотрим на дату поста
 		if (currentBase.length > 0) {
 			// Если находится пост из тех что уже есть в базе, останавливаем скролл
 			if (posts.filter((post) => !!currentBase.find((postid) => postid === post.postId)).length > 0) break;
 		} else {
-			// Если дата последнего поста раньше чем сегодня минус 30 дней, то останавливаем скролл
+			// Если находится пост,дата публикации которого раньше чем сегодня минус 30 дней, то останавливаем скролл
 			if (posts.find((post) => {
-				console.log(post.date, todayMinusOneMonth);
 				return post.date <= todayMinusOneMonth
 			})) break;
 		}
@@ -34,7 +31,14 @@ export const parsePage: (page: Page, currentBase: string[]) => Promise<ParsedDat
 
 	// собираем посты
 	console.log('получаем данные');
-	const result = await page.$$eval('.post', parserPosts, currentBase);
+	const result = (await page.$$eval('.wall_module .post:not(.post_fixed)', parserPosts, currentBase))
+		.map((element) => ({
+			date: parseVKDate(element.date),
+			text: element.text,
+			postId: element.postId,
+			price: element.price,
+			post: element.post,
+		}))
 	console.log('Данные:', result);
 
 	return result;

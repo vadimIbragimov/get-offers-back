@@ -26,10 +26,11 @@ const mainFunc = async () => {
 		getPostsInfo(browser, parsedData)
 			.then(data => {
 				console.log('[parsePages] : data parsed');
+				console.log(new Date());
 				parsedData = data;
 			})
 			.catch(e => console.error(e))
-			.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * SCAN_PERIOD_HOURS))
+			.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 5))
 	};
 
 	//Запускаем сканирование 
