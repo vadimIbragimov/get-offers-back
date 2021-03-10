@@ -12,7 +12,7 @@ const getPostsInfo: (browser: Browser, currentBase: ParsedGroupType[]) => Promis
 			.find((searchGroup) => searchGroup.name === group.name)
 			?.data || [];
 		const data = await parsePage(page, oldData.map((dataItem) => dataItem.postId));
-		result.push({ name: group.name, data: [...oldData, ...data] })
+		result.push({ name: group.name, data: [...data, ...oldData] })
 		console.log(`[getPostsInfo] loop by groups:По группе "${group.name}" добавлено ${data.length} записей;`);
 	}
 	page.close();
