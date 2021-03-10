@@ -16,7 +16,8 @@ const arrMonths = {
 const hours24Regex = '\\d{1,2}:\\d{2}';
 const nowRegex = 'только\\sчто';
 const minuteRegex = 'минуту\\sназад';
-const twoMinutesRegex = 'две\\sминуты\\sназад'
+const twoMinutesRegex = 'две\\sминуты\\sназад';
+const threeMinutesRegex = 'три\\sминуты\\sназад';
 const minutesRegex = '\\d{1,2}\\sминуту?ы?\\sназад';
 const hourRegex = 'час\\sназад';
 const twoHoursRegex = 'два\\sчаса\\sназад';
@@ -39,6 +40,10 @@ const parsers = [
   {
     regex: twoMinutesRegex,
     func: (stringDate: string) => Date.now() - 1000 * 60 * 2,
+  },
+  {
+    regex: threeMinutesRegex,
+    func: (stringDate: string) => Date.now() - 1000 * 60 * 3,
   },
   {
     regex: minutesRegex,
