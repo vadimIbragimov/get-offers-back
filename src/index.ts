@@ -8,7 +8,7 @@ import { classificator } from "./puppeteer/resources/classificator";
 import { groupsList } from "./puppeteer/resources/groups";
 import { ParsedGroupType } from "./puppeteer/types";
 
-const SCAN_PERIOD_HOURS = 12;
+const SCAN_PERIOD_HOURS = 1;
 const app = express();
 const PORT = 808;
 let parsedData: ParsedGroupType[] = [];
@@ -30,7 +30,7 @@ const mainFunc = async () => {
 				parsedData = data;
 			})
 			.catch(e => console.error(e))
-			.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 5))
+			.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * SCAN_PERIOD_HOURS))
 	};
 
 	//Запускаем сканирование 
