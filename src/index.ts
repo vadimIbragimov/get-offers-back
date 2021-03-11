@@ -42,7 +42,7 @@ const mainFunc = async () => {
 			name: item.name,
 			series: item.series?.map((seriesItem) => ({
 				name: seriesItem.name,
-				modesl: seriesItem.models?.map((modelsItem) => ({
+				models: seriesItem.models?.map((modelsItem) => ({
 					name: modelsItem.name
 				}))
 			}))
