@@ -7,11 +7,21 @@ import puppeteer from 'puppeteer';
 import { classificator } from "./puppeteer/resources/classificator";
 import { groupsList } from "./puppeteer/resources/groups";
 import { ParsedGroupType } from "./puppeteer/types";
+import { filterDataByClassificator } from "./puppeteer/tools/filterDataByClassificator";
+import fs from 'fs';
 
 const SCAN_PERIOD_HOURS = 1;
 const app = express();
 const PORT = 808;
 let parsedData: ParsedGroupType[] = [];
+try{
+	const  rawdata = fs.readFileSync('parsedData.json', 'utf8');
+	if(rawdata) parsedData = JSON.parse(rawdata);
+	console.log('Старые данные подняты из файла "parsedData.json"');
+} catch (e) {
+	fs.writeFileSync('parsedData.json', JSON.stringify([]));
+}
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -28,6 +38,7 @@ const mainFunc = async () => {
 				console.log('[parsePages] : data parsed');
 				console.log(new Date());
 				parsedData = data;
+				fs.writeFileSync('parsedData.json', JSON.stringify(data));
 			})
 			.catch(e => console.error(e))
 			.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * SCAN_PERIOD_HOURS))
@@ -60,7 +71,7 @@ const mainFunc = async () => {
 				console.log('validation ok')
 
 				//Тут мы должны из parsedData выдернуть нужные данные, сгенерить excel и вернуть в ответ на запрос
-				res.send(parsedData);
+				res.send(filterDataByClassificator(req.body.groups, req.body.items, parsedData));
 
 			} else console.log('Error: validation failed');
 		} else console.log('Error: blank body')

@@ -8,12 +8,13 @@ const getPostsInfo: (browser: Browser, currentBase: ParsedGroupType[]) => Promis
 	const page = await browser.newPage();
 	for (const group of groupsList) {
 		await page.goto(`https://vk.com/${group.href}`);
+		console.log(`[getPostsInfo] loop by groups: Сканируем группу "${group.name}"`);
 		const oldData = currentBase
 			.find((searchGroup) => searchGroup.name === group.name)
 			?.data || [];
 		const data = await parsePage(page, oldData.map((dataItem) => dataItem.postId));
 		result.push({ name: group.name, data: [...data, ...oldData] })
-		console.log(`[getPostsInfo] loop by groups:По группе "${group.name}" добавлено ${data.length} записей;`);
+		console.log(`[getPostsInfo] loop by groups: Сканирование группы "${group.name}" завершено`);
 	}
 	page.close();
 	return result;

@@ -10,7 +10,7 @@ export const parsePage: (page: Page, currentBase: string[]) => Promise<ParsedDat
 	let counter = 0;
 	const todayDate: Date = new Date();
 	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30)).getTime(); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
-	
+
 	while (counter < 5000) {
 		counter += 1;
 		await autoScroll(page);
@@ -30,7 +30,7 @@ export const parsePage: (page: Page, currentBase: string[]) => Promise<ParsedDat
 	}
 
 	// собираем посты
-	console.log('получаем данные');
+	console.log('[parsePage] Получаем данные');
 	const result = (await page.$$eval('.wall_module .post:not(.post_fixed)', parserPosts, currentBase))
 		.map((element) => ({
 			date: parseVKDate(element.date),
@@ -38,8 +38,13 @@ export const parsePage: (page: Page, currentBase: string[]) => Promise<ParsedDat
 			postId: element.postId,
 			price: element.price,
 			post: element.post,
-		}))
-	console.log('Данные:', result);
+		}));
+
+	if (result.length > 0) {
+		console.log(`[parsePage] Данные получены: добавлено ${result.length} постов`);
+	} else {
+		console.log('[parsePage] Группа просканирована, новых постов не найдено');
+	}
 
 	return result;
 }
