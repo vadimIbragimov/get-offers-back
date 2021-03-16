@@ -45,7 +45,7 @@ const mainFunc = async () => {
 	};
 
 	//Запускаем сканирование 
-	// parsePages();
+	parsePages();
 
 	app.get('/api/classificator', (req, res) => {
 		res.send(classificator.map((item) => ({
