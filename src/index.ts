@@ -45,7 +45,7 @@ const mainFunc = async () => {
 	};
 
 	//Запускаем сканирование 
-	parsePages();
+	// parsePages();
 
 	app.get('/api/classificator', (req, res) => {
 		res.send(classificator.map((item) => ({
@@ -62,7 +62,8 @@ const mainFunc = async () => {
 
 	app.get('/api/groups', (req, res) => res.send(groupsList));
 
-	app.get('/api/get_data', (req, res) => {
+	app.post('/api/get_data', (req, res) => {
+		console.log(req.body)
 		if (req.body) {
 			if (
 				req.body.groups?.length > 0 &&

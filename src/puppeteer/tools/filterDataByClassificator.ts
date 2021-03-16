@@ -19,7 +19,13 @@ export const filterDataByClassificator: (groups: string[], filterObject: Classif
         if (newData.length > 0) {
           ret.push({
             name: group.name,
-            data: newData,
+            data: newData.map((post) => ({
+              price: group.name === 'theMarket' ? post.price : 0,
+              postId: post.postId,
+              text: post.text,
+              date: post.date,
+              post: post.post,
+            })),
           })
         }
       }
