@@ -12,7 +12,7 @@ import fs from 'fs';
 
 const SCAN_PERIOD_HOURS = 1;
 const app = express();
-const PORT = 808;
+const PORT = process.env.PORT || 808;
 let parsedData: ParsedGroupType[] = [];
 try{
 	const  rawdata = fs.readFileSync('parsedData.json', 'utf8');
@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 
 const mainFunc = async () => {
 	const browser = await puppeteer.launch({
-		headless: false,
+		headless: true,
 	});
 
 	//Функция для периодического сканирования групп
