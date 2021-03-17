@@ -3,7 +3,7 @@ import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
 // import getPostsInfo from "./puppeteer/getPostsInfo";
-import puppeteer from 'puppeteer';
+// import puppeteer from 'puppeteer';
 import { classificator } from "./puppeteer/resources/classificator";
 import { groupsList } from "./puppeteer/resources/groups";
 import { ParsedGroupType } from "./puppeteer/types";
@@ -27,9 +27,9 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const mainFunc = async () => {
-	const browser = await puppeteer.launch({
-		headless: true,
-	});
+	// const browser = await puppeteer.launch({
+	// 	headless: true,
+	// });
 
 	//Функция для периодического сканирования групп
 	// const parsePages = () => {
