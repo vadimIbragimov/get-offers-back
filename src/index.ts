@@ -2,8 +2,8 @@
 import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import getPostsInfo from "./puppeteer/getPostsInfo";
-import puppeteer from 'puppeteer';
+// import getPostsInfo from "./puppeteer/getPostsInfo";
+// import puppeteer from 'puppeteer';
 import { classificator } from "./puppeteer/resources/classificator";
 import { groupsList } from "./puppeteer/resources/groups";
 import { ParsedGroupType } from "./puppeteer/types";
@@ -27,25 +27,25 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const mainFunc = async () => {
-	const browser = await puppeteer.launch({
-		headless: true,
-	});
+	// const browser = await puppeteer.launch({
+	// 	headless: true,
+	// });
 
 	//Функция для периодического сканирования групп
-	const parsePages = () => {
-		getPostsInfo(browser, parsedData)
-			.then(data => {
-				console.log('[parsePages] : data parsed');
-				console.log(new Date());
-				parsedData = data;
-				fs.writeFileSync('parsedData.json', JSON.stringify(data));
-			})
-			.catch(e => console.error(e))
-			.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * SCAN_PERIOD_HOURS))
-	};
+	// const parsePages = () => {
+	// 	getPostsInfo(browser, parsedData)
+	// 		.then(data => {
+	// 			console.log('[parsePages] : data parsed');
+	// 			console.log(new Date());
+	// 			parsedData = data;
+	// 			fs.writeFileSync('parsedData.json', JSON.stringify(data));
+	// 		})
+	// 		.catch(e => console.error(e))
+	// 		.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * SCAN_PERIOD_HOURS))
+	// };
 
 	//Запускаем сканирование 
-	parsePages();
+	//parsePages();
 
 	app.get('/api/classificator', (req, res) => {
 		res.send(classificator.map((item) => ({
