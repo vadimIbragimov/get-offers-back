@@ -9,7 +9,7 @@ export const parsePage: (page: Page, currentBase: string[]) => Promise<ParsedDat
 
 	let counter = 0;
 	const todayDate: Date = new Date();
-	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 30)).getTime(); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
+	const todayMinusOneMonth = new Date(todayDate.setDate(todayDate.getDate() - 2)).getTime(); // вычисляем дату, которая была 30 дней назад, до нее и будем скролить
 
 	while (counter < 5000) {
 		counter += 1;
@@ -38,6 +38,7 @@ export const parsePage: (page: Page, currentBase: string[]) => Promise<ParsedDat
 			postId: element.postId,
 			price: element.price,
 			post: element.post,
+			hrefImg: element.hrefImg,
 		}));
 
 	if (result.length > 0) {

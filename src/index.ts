@@ -2,17 +2,27 @@
 import express from "express";
 import cors from 'cors';
 import bodyParser from 'body-parser';
-// import getPostsInfo from "./puppeteer/getPostsInfo";
-// import puppeteer from 'puppeteer';
+import getPostsInfo from "./puppeteer/getPostsInfo";
+import puppeteer from 'puppeteer';
 import { classificator } from "./puppeteer/resources/classificator";
 import { groupsList } from "./puppeteer/resources/groups";
 import { ParsedGroupType } from "./puppeteer/types";
 import { filterDataByClassificator } from "./puppeteer/tools/filterDataByClassificator";
 import fs from 'fs';
+import https from 'https';
+
+// const sslkey = fs.readFileSync('keys/vkgroupparser.h1n.ru_le_21.03.2021.crtkey');
+// const sslcert = fs.readFileSync('keys/vkgroupparser.h1n.ru_le_21.03.2021.crt');
+
+// const options = {
+// 	key: sslkey,
+// 	cert: sslcert
+// };
 
 const SCAN_PERIOD_HOURS = 1;
 const app = express();
-const PORT = process.env.PORT || 808;
+
+const PORT = 808;
 let parsedData: ParsedGroupType[] = [];
 try{
 	const  rawdata = fs.readFileSync('parsedData.json', 'utf8');
@@ -22,16 +32,16 @@ try{
 	fs.writeFileSync('parsedData.json', JSON.stringify([]));
 }
 
-
 app.use(cors());
 app.use(bodyParser.json());
 
+
 const mainFunc = async () => {
 	// const browser = await puppeteer.launch({
-	// 	headless: true,
+	// 	headless: false,
 	// });
-
-	//Функция для периодического сканирования групп
+	//
+	// //Функция для периодического сканирования групп
 	// const parsePages = () => {
 	// 	getPostsInfo(browser, parsedData)
 	// 		.then(data => {
@@ -43,9 +53,9 @@ const mainFunc = async () => {
 	// 		.catch(e => console.error(e))
 	// 		.finally(() => setTimeout(() => parsePages(), 1000 * 60 * 60 * SCAN_PERIOD_HOURS))
 	// };
-
-	//Запускаем сканирование 
-	//parsePages();
+	//
+	// //Запускаем сканирование
+	// parsePages();
 
 	app.get('/api/classificator', (req, res) => {
 		res.send(classificator.map((item) => ({
@@ -83,6 +93,8 @@ const mainFunc = async () => {
 	app.listen(PORT, () => {
 		console.log(`server started at http://localhost:${PORT}`);
 	})
+
+	// https.createServer(options, app).listen(PORT)
 };
 
 mainFunc();
